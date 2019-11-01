@@ -1,0 +1,37 @@
+signal cnt_value : std_logic_vector(10 downto 0);
+signal set : std_logic;
+constant tp : integer 192;
+constant ts : integer 1600;
+
+-- tp comparator
+process(cnt_value)
+	if (cnt_value = tp) then
+		set <= '1';
+	else
+		set <= '0';
+	end if;
+end process;
+
+-- ts comparator
+process(cnt_value)
+	if (cnt_value = ts) then
+		reset <= '1';
+	else
+		reset <= '0';
+	end if;
+end process;
+
+-- samo clk_i v sensitivity list ker je edina, ki lahko spremeni izhod (vse je sinhrono)
+process(clk_i)
+begin
+	if clk_i'event and clk_i='1' then
+		if rst_i='1' then
+			hsync <= '0';
+		elsif set='0' and reset='1'
+			hsync <= '0';
+		elsif set='1' and reset='0'
+			hsync <= '1';
+		end if;
+	-- če ne damo nobenga else-a, potem vhdl ve, da hočemo obdržat prejšnjo vrednost	
+	end if;
+end process;

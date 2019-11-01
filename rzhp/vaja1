@@ -1,0 +1,117 @@
+1) 0(n)
+
+2) 0(n/10)
+n = 10...x = 1
+n = 20...x = 2
+
+3) 2n = 0(n)
+n = 10...x = 20
+n = 20...x = 40
+
+4) log2(n) = 0(logn)
+n = 10...x = 3
+n = 20...x = 4
+
+5) 0(n^2)
+n = 10...x = 25
+n = 25...x = 100
+
+6) 0(n) (edina odvisna od n)
+n = 10...x = 2,000,000 * 5 = 10,000,000
+n = 10...x = 2,000,000 * 10 = 20,000,000
+
+7) n/2 * m/20 = n/2 * n/(10,000 * 20) = 0(n^2)
+n = 10...x = 1/400 !! care m is int
+n = 25...x = 1/100
+
+8) 0(n^2)
+n = 10...x = 55
+n = 20...x = 210
+
+9) log3(n/2) * n^2 = 0(n^2 * logn)
+n = 10...x = 100
+n = 20...x = 2 * 400 = 800
+
+10) 0(1)
+n = 10...x = 0
+n = 20...x = 0
+
+11) 0(logn)
+n = 10...x = 3
+n = 20...x = 4
+
+12) 0(n^(1/2))
+n = 10...x = 11
+n = 20...x = 11
+
+13) O(log^2n), o(logn)
+n = 10...x = 7
+n = 20...x = 10
+
+(i=0, logn)E(log3(2^i)) = (i=0, logn)E(i*log32) = c * log2(n) = 0(log^2n)
+
+14) O(log2n * loglogn), o(log2n) tle rečemo da notranji loop samo 1x steče, pol je zunanji loop lower bound
+n = 10...x = 5
+n = 20...x = 8
+
+(i=0, logn)E(log2log2(2^i)) = (i=0, logn)E(log2i)
+
+15) log2n^2 - 1 = 0(logn^2) = 0(logn)
+n = 10...x = 7
+n = 20...x = 8
+
+16) m*log2n = 0(mlogn)
+n = 10, m = 10...x = 4
+n = 20, m = 10...x = 50
+
+17) O(n^3), o(n)
+n = 10...x = 0 ali 460
+n = 20...x = 0 ali 3820
+
+18) nm ~ n^2, o(n)
+n = 10...x = 0 ali 460
+n = 20...x = 0 ali 3820
+
+19) and 20)
+
+1. 0(n) + c
+2. 3*0(logn)
+
+Sorting functions
+- 2^4096
+- log(sqrt(logn)) ~ log(logn) (asimptotically the same)
+- log(n^2)
+- n ~ 2^(log2n)
+- nlogn
+- n^2 ~ (n 2)
+- nlog(n^n)
+- n^3 ~ 7n^3 + 5n^2− 2n + 13
+- 2^n ~ 2^(n + 7)
+- n*2^n
+- 3^n
+- (n - 1)!
+- n!
+
+
+lim(n->inf) f(x)/g(x) =
+- inf: f(x) is asimptotically bigger
+- c: 0(f(x)) = 0(g(x))
+- 0: g(x) is asimptotically bigger
+
+
+T(n) = 1/2T(n/3) + n
+
+Merge sort:
+2) 0(n)
+1) T(n) = 2*T(n/2) + 0(n) -> merge itself from number 2)
+
+Na vsaki višini drevesa dobiš c*n dela (cn, 2c*n/2, 4c*n/4, ....) višina je log2n, torej je dela višina * delo = 0(nlogn)
+
+Tree method
+T(n) = T(n-1) + n
+n -> n-1 -> n-2 -> ... -> 1
+n levels => 0(n*(n+1)/2) = 0(n^2)
+
+T(n) = T(n/2) + T(n/3) + T(n/6) + n
+unbalanced tree, each height sums to n
+longest leaf has height of log2n, shortest leaf has log6n => O(nlogn), o(nlogn) => 0(nlogn)

@@ -1,0 +1,16 @@
+Povezave na DBMS se delajo preko Connection poola, ki mi v javi pravimo Data source. V javi naredimo JDNI(Java directory and naming interface) lookup s CTX.lookup("JNDI DS"), v ozadju je to LDAP datasource (JDNI je samo interface an). Connection pool je boljši od kreiranje povezavi vsakič oz. držanje povezave ves čas, saj tako z manjšim številom povezav serviramo več uporabnikov.
+
+CAP teorem:
+- consistency (vsi nodi vidijo iste podatke naenkrat, se pravi vsak read dobi najnovejši write)
+- availability (vedno dobimo odgovor na zahtevo)
+- partition tolerance (horizontalna skalabilnost)
+
+Relacijske podatkovne baze zagotavljajo konsistenco in razpoložljivost skozi ACID.
+NoSQL baze pa zagotavljajo porazdeljenost in eno izmed consistency/availability
+
+DAO (data access object) skrivajo logiko klicev na bazo in izpostavijo uporabniško prijazen interface poslovni logiki.
+Vedno imamo en splošen getUser npr klic, da ne kličemo vsak property posebej, vračamo pa object z propertyi in getterji ter setterji. Takim pravimo DTO (data transfer object)
+
+Serializable nam omogoča pretvorbo objekta v stream podatkov (serializacija)
+- binarna
+- markup
