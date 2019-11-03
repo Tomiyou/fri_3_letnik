@@ -1,0 +1,267 @@
+\documentclass[12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+ 
+\usepackage{palatino}
+
+\author{Tomaž Hribernik}
+
+\begin{document}
+  \title{RZHP 1. domača naloga}
+  \maketitle
+
+  \section*{Naloga 1}
+    a)
+    \begin{equation}
+      \begin{gathered}
+        n(log_4(m + 1) * n + 2 * 1) = n^2 * log_4(m + 1) + 2n\Rightarrow\\
+        \theta(n^2 * log_4 (m + 1))
+      \end{gathered}
+    \end{equation}
+    b)
+
+    Najprej n definiramo kot razdaljo od e (end) in s (start)
+    \begin{equation}
+      n = j = e-s\\
+    \end{equation}
+    
+    Potem definiramo novi meji pri rekurzivnih klicih
+    
+    \begin{equation}
+      \begin{gathered}
+        n = (end) - (start) = (s + floor(j/6)) - (s) = \\
+        floor(j/6) = \lfloor{\frac{j}{6}}\rfloor =
+        \lfloor{\frac{n}{6}}\rfloor
+      \end{gathered}
+    \end{equation}
+
+    \begin{equation}
+      \begin{gathered}
+        n = (end) - (start) = (e) - (s + floor(j/6) + 1) = \\
+        (e - s) - \lfloor{\frac{j}{6}}\rfloor + 1 = n - \lfloor{\frac{n}{6}}\rfloor + 1 = \lceil{\frac{5n}{6}}\rceil + 1
+      \end{gathered}
+    \end{equation}
+
+    +1, ki ostane, ostani zaradi tega, ker je med vključno dvema številoma (n1, n2): n2 - n1 + 1 števil. Poleg dveh rekurzivnih klicov moramo v vsakem klicu funkcije skozi for zanko veliko j = n. Dobimo končno enačbo:
+
+    \begin{equation}
+      T(n) = n + T(\lfloor{\frac{n}{6}}\rfloor) + T(\lceil{\frac{5n}{6}}\rceil)
+    \end{equation}
+
+    Sedaj s pomočjo Akra Bazzi teorema dobimo tight bound
+
+    \begin{equation}
+      \begin{gathered}
+        T(n) = T(\lceil{\frac{5n}{6}}\rceil) + T(\lfloor{\frac{n}{6}}\rfloor) + n =\\
+        T(\frac{5n}{6} + \lceil{\frac{5n}{6}}\rceil - \frac{5n}{6}) + T(\frac{n}{6} + \lfloor{\frac{n}{6}}\rfloor - \frac{n}{6}) + n
+      \end{gathered}
+    \end{equation}
+
+    \begin{equation}
+      \begin{aligned}
+        a_1 = 1\qquad b_1 = \frac{5}{6}\qquad h_1=\lceil{\frac{5n}{6}}\rceil - \frac{5n}{6} = O(\frac{n}{log^2n})\\
+        a_2 = 1\qquad b_2 = \frac{5}{6}\qquad h_2=\lfloor{\frac{n}{6}}\rfloor - \frac{n}{6} = O(\frac{n}{log^2n})
+      \end{aligned}
+    \end{equation}
+
+    Dokaza za obe zgornji meji
+
+    \begin{equation}
+      \begin{aligned}
+        \lceil{\frac{5n}{6}}\rceil - \frac{5n}{6} \leq c\frac{n}{log^2n} \Rightarrow 1 \leq c\frac{n}{log^2n}\\
+        \lfloor{\frac{n}{6}}\rfloor - \frac{n}{6} \leq c\frac{n}{log^2n} \Rightarrow 0 \leq c\frac{n}{log^2n}
+      \end{aligned}
+    \end{equation}
+
+    Izračunamo p
+
+    \begin{align}
+      1 * (\frac{5}{6})^p + 1 * (\frac{1}{6})^p = 1 \Rightarrow p = 1
+    \end{align}
+
+    Končno
+
+    \begin{equation}
+      \begin{gathered}
+        T(n) = \theta(n^p(1 + \int_{1}^{n}{\frac{f(u)}{u^{p+1}}du})) = \theta(n^1(1 + \int_{1}^{n}{\frac{u}{u^2}du})) =\\
+        \theta(n(1 + \int_{1}^{n}{\frac{1}{u}du})) = \theta(n(1 + lnu\rvert_{1}^{n})) = \theta(n(1 + lnn - ln1)) =\\
+        \theta(nlogn)
+      \end{gathered}
+    \end{equation}
+    c)
+
+    Funkcijo lahko zapišemo v obliki
+
+    \begin{align}
+      T(n) = T(n-1) + T(n-1) + 1 = 2T(n-1) + 1,\quad T(0) = 1
+    \end{align}
+
+    \begin{equation}
+      \begin{gathered}
+        T(n) = 1+2+4+...+2^n = \sum_{i=0}^{n}{2^i}=2^{n+1} \Rightarrow \theta(2^n)
+      \end{gathered}
+    \end{equation}
+    
+  \section*{Naloga 2}
+  a)
+
+  \begin{equation}
+    \begin{aligned}
+      T(n) = 4T(\frac{n}{9}) + \sqrt[2]{n}\\
+      a = 4\qquad b = 9\qquad d = \frac{1}{2}
+    \end{aligned}
+  \end{equation}
+
+  Uporabimo Master theorem
+
+  \begin{equation}
+    a > b^d \Rightarrow 4 > 9^{\frac{1}{2}} = 3 \Rightarrow T(n) = \theta(n^{log_94})
+  \end{equation}
+  b)
+
+  \begin{equation}
+    T(n) = 5T(\frac{n}{4}) + log(n)
+  \end{equation}
+
+  \begin{align}
+    a = 5\qquad b = 4\qquad f(n) = log(n)
+  \end{align}
+
+  Uporabimo Master theorem
+
+  \begin{equation}
+    f(n) = O(n^{log_45-\epsilon}) \Rightarrow T(n) = \theta(n^{log_45})
+  \end{equation}
+
+  \section*{Naloga 3}
+  a)
+
+  \begin{equation}
+    \begin{aligned}
+    T(n) = 2T(\frac{n}{4}) + 3T(\frac{n}{6}) + \theta(nlogn)\\
+    f(n)=nlogn\qquad k = 2\qquad a_1 = 2\qquad b_1 = \frac{1}{4}\\
+    a_2 = 3\qquad b_2 = \frac{1}{6}
+  \end{aligned}
+\end{equation}
+
+  \begin{equation}
+    \sum_{i=1}^{k}{a_ib_i^p} = 1 \Rightarrow 2(\frac{1}{4})^p + 3(\frac{1}{6})^p = 1 \Rightarrow p = 1
+  \end{equation}
+
+  \begin{equation}
+    \begin{aligned}
+      T(n) = \theta(n^p(1 + \int_{1}^{n}{\frac{f(u)}{u^{p+1}}du})) = \theta(n^1(1 + \int_{1}^{n}{\frac{ulogu}{u^2}du})) =\\
+      \theta(n(1 + \int_{1}^{n}{\frac{logu}{u}du}))
+    \end{aligned}
+  \end{equation}
+
+  \begin{align}
+    x = logu \Rightarrow dx = \frac{1}{u}du \Rightarrow du = udx
+  \end{align}
+
+  \begin{equation}
+    \begin{aligned}
+      T(n) = \theta(n(1 + \int_{1}^{n}{\frac{logu}{u}du})) = \theta(n(1 + \int_{1}^{n}{\frac{x}{u}udx})) =\\
+      \theta(n(1 + \frac{x^2}{2}\rvert_{1}^{n})) = \theta(n(1 + \frac{log^2u}{2}\rvert_{1}^{n})) = \theta(n(1 + \frac{log^2n}{2} - \frac{log^21}{2})) = \\
+      \Rightarrow \theta(nlog^2n)
+    \end{aligned}
+  \end{equation}
+  b)
+
+  \begin{equation}
+    \begin{aligned}
+      T(n) = T(\frac{n}{9}) + T(\frac{n}{4}) + 2T(\frac{n}{36}) + \sqrt{n^3}\\
+      f(n)=\sqrt{n^3}\qquad a_1 = 1\qquad b_1 = \frac{1}{9}\\
+      a_2 = 1\qquad b_2 = \frac{1}{4}\\
+      a_3 = 2\qquad b_3 = \frac{1}{36}
+    \end{aligned}
+  \end{equation}
+
+  Za izračun vrednosti spremenljivke p sem uporabil wolfram alpha
+
+  \begin{equation}
+    \sum_{i=1}^{k}{a_ib_i^p} = 1 \Rightarrow 1(\frac{1}{9})^p + 1(\frac{1}{4})^p + 2(\frac{1}{36})^p = 1 \Rightarrow p \approx 0.5695215
+  \end{equation}
+
+  \begin{equation}
+    \begin{aligned}
+      T(n) = \theta(n^p(1 + \int_{1}^{n}{\frac{f(u)}{u^{p+1}}du})) = \theta(n^{p}(1 + \int_{1}^{n}{\frac{\sqrt{u^3}}{u^{p+1}}du})) =\\
+      \theta(n^{p}(1 + \int_{1}^{n}{u^{\frac{3}{2}-(p+1)}du})) = \theta(n^{p}(1 + \int_{1}^{n}{u^{-0.0695215}du})) =\\
+      \theta(n^{p}(1 + \frac{u^{0.9304785}}{0.9304785}\rvert_{1}^{n})) = \theta(n^{p}(1 + \frac{n^{0.9304785}}{0.9304785} - \frac{1^{0.9304785}}{0.9304785})) =\\
+      \theta(n^{0.5695215}\frac{n^{0.9304785}}{0.9304785}) = \theta(n^{1.5}) = \theta(\sqrt{n^3})
+    \end{aligned}
+  \end{equation}
+
+  \section*{Naloga 4}
+  a)
+
+  Seštejemo vsak nivo posebej, zgornja meja je podana z dolžino rekurzije, kjer se pri klicu deli z 2, saj je tam neuravnoteženo drevo najdaljše
+  \begin{equation}
+    T(n) = n^3 + 2n^3 + 4n^3 + ... + 2^{log_2n}n^3 = \sum_{i=0}^{log_2n}{2^in^3}=n^3\sum_{i=0}^{log_2n}{2^i}=n^4
+  \end{equation}
+  d)
+
+  \begin{equation}
+    \begin{aligned}
+      T(n) = 8T(\lfloor{\frac{n}{2}}\rfloor) + 27T(\lfloor{\frac{n}{3}}\rfloor) + n^3 = \\8T(\frac{n}{2} + \lfloor{\frac{n}{2}}\rfloor - \frac{n}{2}) + 27T(\frac{n}{3} + \lfloor{\frac{n}{3}}\rfloor - \frac{n}{3}) + n^3\\
+      a_1 = 8\qquad b_1 = \frac{1}{2}\qquad h_1=\lfloor{\frac{n}{2}}\rfloor - \frac{n}{2} = O(\frac{n}{log^2n})\\
+      a_2 = 27\qquad b_2 = \frac{1}{3}\qquad h_2=\lfloor{\frac{n}{3}}\rfloor - \frac{n}{3} = O(\frac{n}{log^2n})
+    \end{aligned}
+  \end{equation}
+
+  Dokaza za obe zgornji meji
+
+  \begin{equation}
+    \begin{aligned}
+      \lfloor{\frac{n}{2}}\rfloor - \frac{n}{2} \leq c\frac{n}{log^2n} \Rightarrow 0 \leq c\frac{n}{log^2n}\\
+      \lfloor{\frac{n}{3}}\rfloor - \frac{n}{3} \leq c\frac{n}{log^2n} \Rightarrow 0 \leq c\frac{n}{log^2n}
+    \end{aligned}
+  \end{equation}
+
+  \begin{equation}
+    \sum_{i=1}^{k}{a_ib_i^p} = 1 \Rightarrow 8(\frac{1}{2})^p + 27(\frac{1}{3})^p = 1 \Rightarrow p = 3
+  \end{equation}
+
+  \begin{equation}
+    \begin{aligned}
+      T(n) = \theta(n^p(1 + \int_{1}^{n}{\frac{f(u)}{u^{p+1}}du})) = \theta(n^3(1 + \int_{1}^{n}{\frac{u^3}{u^{3+1}}du})) =\\
+      \theta(n^3(1 + \int_{1}^{n}{n^{-1}du})) = \theta(n^3(1 + lnu\rvert_{1}^{n})) = \theta(n^3(1 + lnn - ln1))\\
+      \Rightarrow \theta(n^3logn)
+    \end{aligned}
+  \end{equation}
+
+  \section*{Naloga 5}
+  a)
+
+  \begin{equation}
+    \begin{aligned}
+      T(n) = T(n-1) + n^2 + n - 1\\
+      T(n+1) - T(n)= (n+1)^2 + (n + 1) - 1\\
+      (E-1)T(n)=n^2+2n+1+n\\
+      (E-1)T(n)=n^2+3n+1\\
+      \text{polinom na desni ustreza funkciji } (a_0 + a_1n + a_2n^2)a^n,\\
+      \text{kjer je a = 1, anihilira pa jo }(E-1)^3 \Rightarrow (E-1)^3(E-1)T(n)=0\\
+    \end{aligned}
+  \end{equation}
+
+  \begin{equation}
+    \begin{aligned}
+      (E-1)^4T(n)=0\qquad a = 1\qquad d = 0\\
+      T(n) = (\sum_{i=0}^{d-1}{\alpha_in^i})a^n = \alpha_0 + \alpha_1n + \alpha_2n^2 + \alpha_3n^3\\
+      T(0) = 1 = \alpha_0 + \alpha_10 + \alpha_20 + \alpha_30 \Rightarrow \alpha_0 = 1\\
+      T(1) = T(0) + n^2 + n - 1 = 1 + 1^2 + 1 - 1 = 2\\
+      T(2) = T(1) + n^2 + n - 1 = 2 + 2^2 + 2 - 1 = 7\\
+      T(3) = T(2) + n^2 + n - 1 = 7 + 3^2 + 3 - 1 = 18
+    \end{aligned}
+  \end{equation}
+
+  \dots
+
+  \begin{equation}
+    \begin{aligned}
+      \alpha_0 = 1\qquad \alpha_1 = -\frac{1}{3}\qquad \alpha_2 = 1\qquad \alpha_3 = \frac{1}{3}\\
+      T(n) = \alpha_0 + \alpha_1n + \alpha_2n^2 + \alpha_3n^3 = 1 -\frac{n}{3} + n^2 + \frac{n^3}{3}\\
+    \end{aligned}
+  \end{equation}
+\end{document}
