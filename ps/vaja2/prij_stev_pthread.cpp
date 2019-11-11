@@ -14,35 +14,41 @@ int min(int a, int b);
 void sequential(int *vsote);
 void staticno(int *vsote);
 void* staticno_thread(void *arg);
+void razrezano(int *vsote);
+void* razrezano_thread(void *arg);
 void dinamicno(int *vsote);
 void* dinamicno_thread(void *arg);
 
-int N = 168715;
-int maxThreads = 4;
-int dynamic_batch_size = 500;
+const int N = 1000000;
+const int maxThreads = 4;
+const int dynamic_batch_size = 10000;
 
 pthread_mutex_t lock;
 
 int main() {
   pthread_mutex_init(&lock, NULL);
 
-  int vsote1[N + 1];
-  for (int i = 0; i <= N; i++) {
-    vsote1[i] = 0;
-  }
+  // int vsote1[N + 1];
+  // for (int i = 0; i <= N; i++) {
+  //   vsote1[i] = 0;
+  // }
 
-  int vsote2[N + 1];
-  for (int i = 0; i <= N; i++) {
-    vsote2[i] = 0;
-  }
+  int *vsote1 = (int *)malloc(sizeof(int) * N);
 
-  dinamicno(vsote1);
-  sequential(vsote2);
+  // int vsote2[N + 1];
+  // for (int i = 0; i <= N; i++) {
+  //   vsote2[i] = 0;
+  // }
 
-  if (!compare(vsote1, vsote2)) printf("DELITELJI ERROR\n");
-  else {
-    printSorodna(vsote1);
-  }
+  razrezano(vsote1);
+  // sequential(vsote2);
+
+  // if (!compare(vsote1, vsote2)) printf("DELITELJI ERROR\n");
+  // else {
+  //   printSorodna(vsote1);
+  // }
+
+  free(vsote1);
 
   pthread_mutex_destroy(&lock);
 }
@@ -54,14 +60,12 @@ void sequential(int *vsote) {
 }
 
 void staticno(int *vsote) {
-  thread_args args{ 1, vsote };
-  
   pthread_t threads[maxThreads];
   for (int i = 0; i < maxThreads; i++) {
     thread_args *args = (thread_args *)malloc(sizeof(thread_args));
     args->next = i;
     args->results = vsote;
-    pthread_create(&threads[i], NULL, dinamicno_thread, (void *)args);
+    pthread_create(&threads[i], NULL, staticno_thread, (void *)args);
   }
 
   for (int i = 0; i < maxThreads; i++) {
@@ -70,6 +74,7 @@ void staticno(int *vsote) {
 }
 
 void* staticno_thread(void *arg) {
+  // printf("Staticno thread.\n");
   thread_args *pointers = (thread_args *)arg;
   int next = pointers->next;
   int *results = pointers->results;
@@ -78,6 +83,34 @@ void* staticno_thread(void *arg) {
   // prevzemi naslednji batch
   for (;next <= N; next += maxThreads) {
     results[next] = vsotaDeliteljev(next);
+  }
+
+  return NULL;
+}
+
+void razrezano(int *vsote) {
+  pthread_t threads[maxThreads];
+  for (int i = 0; i < maxThreads; i++) {
+    thread_args *args = (thread_args *)malloc(sizeof(thread_args));
+    args->next = (N/maxThreads + 1) * i;
+    args->results = vsote;
+    pthread_create(&threads[i], NULL, razrezano_thread, (void *)args);
+  }
+
+  for (int i = 0; i < maxThreads; i++) {
+    pthread_join(threads[i], NULL);
+  }
+}
+
+void* razrezano_thread(void *arg) {
+  // printf("Razrezano thread.\n");
+  thread_args *pointers = (thread_args *)arg;
+  int next = pointers->next;
+  int *results = pointers->results;
+  free(arg);
+
+  for (int i = 0; i < N/maxThreads + 1 && next + i <= N; i++) {
+    results[next + i] = vsotaDeliteljev(next + i);
   }
 
   return NULL;
@@ -97,8 +130,10 @@ void dinamicno(int *vsote) {
 }
 
 void* dinamicno_thread(void *arg) {
+  // printf("Dinamicno thread.\n");
   thread_args *args = (thread_args *)arg;
   int *results = args->results, next;
+  int me = -1;
 
   // prevzemi naslednji batch
   while (1) {
