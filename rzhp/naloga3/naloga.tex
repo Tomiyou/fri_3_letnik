@@ -1,0 +1,108 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{palatino}
+\usepackage{enumitem}
+\usepackage{amssymb}
+
+\title{Assignment 3}
+\author{Tomaž Hribernik}
+\date{December 2019}
+
+\begin{document}
+
+\maketitle
+
+\section{Amortization}
+	We need to calculate the amortized cost of this function.
+	\begin{gather*}
+	c_i =
+	\begin{cases}
+	i + c & ;i \neq k^{2}, k \in \mathbb N \\
+	i^{2} & ;i = k^{2}, k \in \mathbb N
+	\end{cases}
+	\end{gather*}
+	I did this using the aggregate method. Between 1 and N (both inclusive) there is $\sqrt{N}$ numbers that are perfect squares, that's what I use to sum cost when the second case is true in the function above. I also subtracted cost of the first case in the second sum as we count it $\sqrt{N}$ too many times otherwise
+	\begin{gather*}
+	\frac{1}{n}\sum_{i=1}^{n}{c_i} = \frac{1}{n}(\sum_{i=1}^{n}{(i + c)} + \sum_{i=1}^{\left \lfloor{\sqrt{n}}\right \rfloor}{(i^{4}-(i^2 + c))}) = \\
+	\frac{1}{n}(\sum_{i=1}^{n}{i} + \sum_{i=1}^{n}{c}) + \frac{1}{n}(\sum_{i=1}^{\left \lfloor{\sqrt{n}}\right \rfloor}{i^{4}} - \sum_{i=1}^{\left \lfloor{\sqrt{n}}\right \rfloor}{(i^2 + c)})
+	\end{gather*}
+	I also used the following formulas
+	\begin{gather*}
+	\sum_{i=1}^{n}{i^{4}} = \frac{n(n+1)(6n^3 + 9n^2 + n - 1)}{30}\\	
+	\sum_{i=1}^{n}{i^{2}} = \frac{n(n+1)(2n+1)}{6}
+	\end{gather*}
+	\begin{gather*}
+	\frac{1}{n}(\sum_{i=1}^{n}{i} + \sum_{i=1}^{n}{c}) + \frac{1}{n}(\sum_{i=1}^{\left \lfloor{\sqrt{n}}\right \rfloor}{i^{4}} - \sum_{i=1}^{\left \lfloor{\sqrt{n}}\right \rfloor}{(i^2 + c)}) =\\
+	\frac{n(n+1)}{2n} + \frac{nc}{n} + \frac{\sqrt{n}(\sqrt{n} + 1)(6\sqrt{n}^{3} + 9\sqrt{n}^{2} + \sqrt{n} - 1)}{30n} - \frac{1}{n}\sum_{i=1}^{\left \lfloor{\sqrt{n}}\right \rfloor}{(i^2 + c)} = \\
+	\frac{n+1}{2} + c + \frac{(n + \sqrt{n})(6\sqrt{n}^{3} + 9\sqrt{n}^{2} + \sqrt{n} - 1)}{30n} - \frac{\sqrt{n}(\sqrt{n} + 1)(2\sqrt{n} + 1)}{6n} - \frac{\sqrt{n}c}{n} =\\
+	\frac{n}{2} + \frac{1}{2} + c + \frac{\sqrt{n}^{3}}{5} + \frac{n}{2} + \frac{\sqrt{n}}{3} - \frac{1}{30\sqrt{n}} - \frac{(n + \sqrt{n})(2\sqrt{n} + 1)}{6n} - \frac{c}{\sqrt{n}} =\\
+	n + \frac{1}{2} + c + \frac{\sqrt{n}^{3}}{5} + \frac{\sqrt{n}}{3} - \frac{1}{30\sqrt{n}} - \frac{\sqrt{n}}{3} - \frac{1}{6\sqrt{n}} - \frac{1}{2} - \frac{c}{\sqrt{n}} =\\
+	n + c + \frac{\sqrt{n}^{3}}{5} - \frac{1}{30\sqrt{n}} - \frac{1}{6\sqrt{n}} - \frac{c}{\sqrt{n}}
+	\end{gather*}
+	Want to know the amortized cost as n approaches infinity, so we use limit to get the final result
+	\begin{gather*}
+		\lim_{n\to\infty}(n + c + \frac{\sqrt{n}^{3}}{5} - \frac{1}{30\sqrt{n}} - \frac{1}{6\sqrt{n}} - \frac{c}{\sqrt{n}}) = \frac{\sqrt{n}^{3}}{5} = \sqrt{n}^{3} = c_i\sp{\prime}
+	\end{gather*}
+	The amortized cost for this function is $c_i\sp{\prime} = \sqrt{n}^{3}$ where n is the number of calls of the function.
+
+\section{Amortization}
+	In order to prove that even when we only expand the table by 10\% amortized cost is still constant, I presumed it true, and worked my way from the end to the start while taking lectures as an example.
+	\begin{gather*}
+		c_i\sp{\prime} = c_i + \Phi(D_i) - \Phi(D_{i-1})\\
+		\Phi(D_i) = 11 \cdot num_i - 10 \cdot size_i
+	\end{gather*}
+	11 and 10 were selected as coefficients as they nicely resolve the equation (when I worked from my way from the end to start) and are basically just multiplied by 10 from the original equation $\Phi(D_i) = 1,1 \cdot num_i - size_i$ from lectures. They also satisfy the condition that $\Phi(D_i) \geq 0$
+	\begin{enumerate}[label=\alph*)]
+		\item Expansion on i-th operation\\
+		When expanding the following holds
+		\begin{gather*}
+			size_i = 1.1 \cdot size_{i-1}\\
+			size_{i-1} = num_{i-1} = num_i - 1
+		\end{gather*}
+		Now we prove that amortized cost is still constant
+		\begin{gather*}
+			c_i\sp{\prime} = c_i + \Phi(D_i) - \Phi(D_{i-1}) =\\
+			num_i + (11 \cdot num_i - 10 \cdot size_i) - (11 \cdot num_{i-1} - 10 \cdot size_{i-1}) =\\
+			12num_i - 10(1.1 \cdot size_{i-1}) - 11(num_i - 1) + 10(num_i - 1) =\\
+			12num_i - 11 \cdot size_{i-1} - 11num_i + 11 + 10num_i - 10 =\\
+			11num_i - 11(num_i - 1) + 1 = 11num_i - 11num_i + 11 + 1 = 12
+		\end{gather*}
+		
+		\item NO expansion on i-th operation\\
+		When expanding the following holds
+		\begin{gather*}
+		size_i = size_{i-1}\\
+		num_{i-1} = num_i - 1
+		\end{gather*}
+		Now we prove that amortized cost is still constant
+		\begin{gather*}
+		c_i\sp{\prime} = c_i + \Phi(D_i) - \Phi(D_{i-1}) =\\
+		1 + (11 \cdot num_i - 10 \cdot size_i) - (11 \cdot num_{i-1} - 10 \cdot size_{i-1}) =\\
+		1 + 11 \cdot num_i - 10 \cdot size_i - 11(num_i - 1) + 10 \cdot size_i =\\
+		1 + 11 \cdot num_i - 11 \cdot num_i + 11 = 12
+		\end{gather*}
+	\end{enumerate}
+\section{Approximation}
+	First we need to calculate the probability of satisfying one pair of symmetric clauses
+	\begin{gather*}
+	P(clause_1 \land clause_2 = 1) = 1 - P(clause_1 \land clause_2 = 0)
+	\end{gather*}
+	There are 16 possible inputs to each for each clause, but only one where the output is 0 since each clause is in conjunctive normal form
+	\begin{gather*}
+	P(\textit{clause is not satisfied}) = \frac{1}{2} \cdot \frac{1}{2} \cdot \frac{1}{2} \cdot \frac{1}{2} = \frac{1}{16}
+	\end{gather*}
+	For $clause_1 \land clause_2$ to be 0, either has to be 0 and since they cannot be 0 at
+	the same time (their terms are all negated), this means 2 of 16 possible inputs result in output being 0.
+	\begin{gather*}
+	P(clause_1 \land clause_2 = 0) = \frac{2}{16}\\
+	P(clause_1 \land clause_2 = 1) = 1 - \frac{2}{16} = \frac{14}{16} = \frac{7}{8} \Rightarrow E(Y_i) = \frac{7}{8}
+	\end{gather*}
+	Now we can start finding the approximation factor for this algorithm
+	\begin{gather*}
+	Y = \textit{number of satisfied pairs of clauses} = Y_1 + Y_2 + \dots + Y_n \\
+	E(Y) = E(Y_1 + Y_2 + \dots + Y_n) = E(\sum_{i=1}^{n}{Y_i}) = \sum_{i=1}^{n}{E(Y_i)} = \sum_{i=1}^{n}{\frac{7}{8}}\\
+	E(Y) = \frac{7}{8}n = C; C^{*} = n \Rightarrow \frac{C^{*}}{C} = \frac{n}{\frac{7}{8}n} = \frac{8}{7}
+	\end{gather*}
+
+\end{document}

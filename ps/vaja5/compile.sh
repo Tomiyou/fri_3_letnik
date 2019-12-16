@@ -1,0 +1,1 @@
+g++ mmul.cpp gpu.cpp -lOpenCL -lfreeimage

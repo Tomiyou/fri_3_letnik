@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <omp.h>
+#include "consts.h"
 
 typedef struct thread_args {
   int next, *results;
@@ -18,29 +19,15 @@ void staticno(int *vsote);
 void razrezano(int *vsote);
 void dinamicno(int *vsote);
 
-const int N = 1000000;
-const int maxThreads = 4;
-const int dynamic_batch_size = 10000;
-
 int main() {
-  // int vsote1[N + 1];
-  // for (int i = 0; i <= N; i++) {
-  //   vsote1[i] = 0;
-  // }
 
   int *vsote1 = (int *)malloc(sizeof(int) * N);
 
-  // int vsote2[N + 1];
-  // for (int i = 0; i <= N; i++) {
-  //   vsote2[i] = 0;
-  // }
-
-  razrezano(vsote1);
-  // sequential(vsote2);
+  dinamicno(vsote1);
 
   // if (!compare(vsote1, vsote2)) printf("DELITELJI ERROR\n");
   // else {
-  //   printSorodna(vsote1);
+    // printSorodna(vsote1);
   // }
 
   free(vsote1);

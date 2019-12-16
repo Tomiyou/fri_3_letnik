@@ -1,6 +1,7 @@
 #include <pthread.h>
 #include <stdio.h>
 #include <math.h>
+#include "consts.h"
 
 typedef struct thread_args {
   int next, *results;
@@ -19,33 +20,18 @@ void* razrezano_thread(void *arg);
 void dinamicno(int *vsote);
 void* dinamicno_thread(void *arg);
 
-const int N = 1000000;
-const int maxThreads = 4;
-const int dynamic_batch_size = 10000;
-
 pthread_mutex_t lock;
 
 int main() {
   pthread_mutex_init(&lock, NULL);
 
-  // int vsote1[N + 1];
-  // for (int i = 0; i <= N; i++) {
-  //   vsote1[i] = 0;
-  // }
-
   int *vsote1 = (int *)malloc(sizeof(int) * N);
 
-  // int vsote2[N + 1];
-  // for (int i = 0; i <= N; i++) {
-  //   vsote2[i] = 0;
-  // }
-
-  razrezano(vsote1);
-  // sequential(vsote2);
+  staticno(vsote1);
 
   // if (!compare(vsote1, vsote2)) printf("DELITELJI ERROR\n");
   // else {
-  //   printSorodna(vsote1);
+    printSorodna(vsote1);
   // }
 
   free(vsote1);

@@ -1,0 +1,1 @@
+g++ mandelbrot.cpp gpu/mandelbrot.cpp -lOpenCL -lfreeimage

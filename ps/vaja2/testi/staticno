@@ -1,0 +1,36 @@
+Testing Pthread
+ Performance counter stats for './prij_pthread' (30 runs):
+
+           3859,33 msec task-clock                #    3,805 CPUs utilized            ( +-  0,17% )
+               449      context-switches          #    0,116 K/sec                    ( +- 16,63% )
+                 2      cpu-migrations            #    0,000 K/sec                    ( +- 28,37% )
+              1064      page-faults               #    0,276 K/sec                    ( +-  0,12% )
+       11893969421      cycles                    #    3,082 GHz                      ( +-  0,17% )  (62,20%)
+        5380879069      instructions              #    0,45  insn per cycle           ( +-  0,02% )  (74,87%)
+        1335474894      branches                  #  346,038 M/sec                    ( +-  0,02% )  (74,92%)
+           6377785      branch-misses             #    0,48% of all branches          ( +-  0,23% )  (75,05%)
+           3873694      L1-dcache-loads           #    1,004 M/sec                    ( +-  3,27% )  (75,16%)
+            688196      L1-dcache-load-misses     #   17,77% of all L1-dcache hits    ( +-  3,49% )  (75,23%)
+            118187      LLC-loads                 #    0,031 M/sec                    ( +- 10,13% )  (49,92%)
+             43294      LLC-load-misses           #   36,63% of all LL-cache hits     ( +- 15,29% )  (49,72%)
+
+            1,0143 +- 0,0105 seconds time elapsed  ( +-  1,03% )
+
+Testing OpenMP
+ Performance counter stats for './prij_openmp' (30 runs):
+
+           3895,57 msec task-clock                #    3,648 CPUs utilized            ( +-  0,24% )
+               610      context-switches          #    0,157 K/sec                    ( +- 17,58% )
+                 4      cpu-migrations            #    0,001 K/sec                    ( +- 28,74% )
+              1082      page-faults               #    0,278 K/sec                    ( +-  0,18% )
+       11992234557      cycles                    #    3,078 GHz                      ( +-  0,22% )  (62,16%)
+        5393590200      instructions              #    0,45  insn per cycle           ( +-  0,03% )  (74,76%)
+        1338203531      branches                  #  343,519 M/sec                    ( +-  0,04% )  (74,85%)
+           6463997      branch-misses             #    0,48% of all branches          ( +-  0,24% )  (75,00%)
+           5165932      L1-dcache-loads           #    1,326 M/sec                    ( +-  3,86% )  (75,10%)
+            766054      L1-dcache-load-misses     #   14,83% of all L1-dcache hits    ( +-  4,80% )  (75,28%)
+            169842      LLC-loads                 #    0,044 M/sec                    ( +- 12,26% )  (50,05%)
+             66280      LLC-load-misses           #   39,02% of all LL-cache hits     ( +- 15,22% )  (49,72%)
+
+            1,0678 +- 0,0241 seconds time elapsed  ( +-  2,26% )
+
