@@ -1,0 +1,1 @@
+mpirun --mca orte_base_help_aggregate 0 --hostfile hostfile -np ${1:-4} a.out

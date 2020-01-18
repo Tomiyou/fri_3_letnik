@@ -1,0 +1,438 @@
+Running simulated annealing! --------------------------------------------------
+File: problems/Problem5.txt
+Stevilo tovornjakov = 100
+Cost: 346466.22586590005
+Tovornjak: 80, 69, 
+Tovornjak: 68, 
+Tovornjak: 75, 76, 
+Tovornjak: 65, 31, 76, 66, 
+Tovornjak: 67, 71, 
+Tovornjak: 35, 69, 
+Tovornjak: 63, 
+Tovornjak: 59, 92, 
+Tovornjak: 93, 16, 
+Tovornjak: 16, 80, 
+Tovornjak: 66, 49, 
+Tovornjak: 98, 
+Tovornjak: 84, 
+Tovornjak: 65, 79, 32, 
+Tovornjak: 37, 28, 
+Tovornjak: 43, 
+Tovornjak: 58, 80, 33, 
+Tovornjak: 39, 
+Tovornjak: 15, 
+Tovornjak: 17, 25, 
+Tovornjak: 61, 61, 32, 
+Tovornjak: 10, 
+Tovornjak: 30, 
+Tovornjak: 18, 2, 
+Tovornjak: 30, 61, 
+Tovornjak: 63, 
+Tovornjak: 75, 
+Tovornjak: 36, 44, 97, 
+Tovornjak: 19, 24, 
+Tovornjak: 61, 
+Tovornjak: 13, 
+Tovornjak: 87, 
+Tovornjak: 27, 
+Tovornjak: 88, 
+Tovornjak: 51, 
+Tovornjak: 62, 12, 86, 
+Tovornjak: 10, 
+Tovornjak: 76, 22, 
+Tovornjak: 100, 
+Tovornjak: 37, 77, 
+Tovornjak: 59, 
+Tovornjak: 93, 96, 
+Tovornjak: 86, 32, 91, 
+Tovornjak: 50, 80, 72, 
+Tovornjak: 66, 30, 
+Tovornjak: 44, 19, 18, 
+Tovornjak: 49, 
+Tovornjak: 100, 
+Tovornjak: 43, 88, 
+Tovornjak: 3, 18, 66, 
+Tovornjak: 18, 48, 
+Tovornjak: 1, 16, 86, 98, 
+Tovornjak: 41, 
+Tovornjak: 32, 37, 98, 
+Tovornjak: 92, 54, 62, 
+Tovornjak: 2, 
+Tovornjak: 88, 43, 
+Tovornjak: 15, 54, 66, 
+Tovornjak: 2, 62, 63, 
+Tovornjak: 97, 
+Tovornjak: 34, 6, 12, 
+Tovornjak: 65, 7, 63, 
+Tovornjak: 53, 
+Tovornjak: 87, 
+Tovornjak: 79, 16, 
+Tovornjak: 22, 6, 
+Tovornjak: 85, 91, 91, 
+Tovornjak: 55, 
+Tovornjak: 79, 47, 
+Tovornjak: 71, 61, 
+Tovornjak: 93, 
+Tovornjak: 66, 98, 78, 
+Tovornjak: 1, 53, 
+Tovornjak: 96, 
+Tovornjak: 98, 24, 
+Tovornjak: 43, 86, 78, 72, 35, 
+Tovornjak: 28, 
+Tovornjak: 42, 
+Tovornjak: 26, 
+Tovornjak: 40, 1, 
+Tovornjak: 30, 
+Tovornjak: 12, 
+Tovornjak: 26, 
+Tovornjak: 5, 
+Tovornjak: 74, 
+Tovornjak: 95, 
+Tovornjak: 53, 
+Tovornjak: 74, 
+Tovornjak: 18, 78, 
+Tovornjak: 39, 
+Tovornjak: 75, 
+Tovornjak: 77, 62, 98, 15, 
+Tovornjak: 52, 
+Tovornjak: 99, 
+Tovornjak: 2, 
+Tovornjak: 31, 
+Tovornjak: 85, 68, 
+Tovornjak: 11, 23, 
+Tovornjak: 34, 17, 18, 66, 92, 
+Tovornjak: 15, 
+-------------------------
+Cost: 189199.91455500002
+Tovornjak: 50, 6, 
+Tovornjak: 81, 81, 
+Tovornjak: 89, 
+Tovornjak: 37, 
+Tovornjak: 39, 
+Tovornjak: 78, 39, 
+Tovornjak: 47, 1, 4, 
+Tovornjak: 47, 
+Tovornjak: 60, 
+Tovornjak: 57, 11, 
+Tovornjak: 93, 52, 90, 4, 
+Tovornjak: 1, 
+Tovornjak: 52, 97, 69, 
+Tovornjak: 4, 95, 29, 
+Tovornjak: 60, 
+Tovornjak: 31, 50, 
+Tovornjak: 98, 42, 
+Tovornjak: 43, 39, 
+Tovornjak: 56, 33, 47, 65, 6, 
+Tovornjak: 9, 
+Tovornjak: 14, 
+Tovornjak: 78, 46, 
+Tovornjak: 69, 37, 26, 29, 59, 
+Tovornjak: 10, 89, 
+Tovornjak: 11, 
+Tovornjak: 38, 49, 
+Tovornjak: 31, 22, 23, 46, 69, 62, 93, 
+Tovornjak: 48, 61, 5, 1, 
+Tovornjak: 70, 61, 18, 
+Tovornjak: 43, 
+Tovornjak: 75, 86, 56, 
+Tovornjak: 74, 93, 
+Tovornjak: 17, 15, 47, 
+Tovornjak: 93, 
+Tovornjak: 74, 74, 24, 
+Tovornjak: 4, 28, 23, 
+Tovornjak: 11, 20, 
+Tovornjak: 24, 66, 68, 
+Tovornjak: 23, 34, 46, 
+Tovornjak: 2, 31, 
+Tovornjak: 67, 
+Tovornjak: 24, 83, 
+Tovornjak: 3, 
+Tovornjak: 85, 
+Tovornjak: 6, 10, 
+Tovornjak: 48, 
+Tovornjak: 85, 21, 
+Tovornjak: 11, 
+Tovornjak: 99, 66, 63, 
+Tovornjak: 12, 65, 13, 
+Tovornjak: 65, 
+Tovornjak: 63, 
+Tovornjak: 21, 
+Tovornjak: 15, 
+Tovornjak: 97, 77, 
+Tovornjak: 12, 79, 
+Tovornjak: 43, 
+Tovornjak: 77, 3, 32, 
+Tovornjak: 11, 
+Tovornjak: 96, 
+Tovornjak: 17, 82, 
+Tovornjak: 2, 
+Tovornjak: 40, 
+Tovornjak: 11, 63, 79, 83, 
+Tovornjak: 87, 
+Tovornjak: 55, 
+Tovornjak: 12, 
+Tovornjak: 54, 
+Tovornjak: 29, 
+Tovornjak: 30, 
+Tovornjak: 69, 98, 71, 92, 
+Tovornjak: 76, 11, 42, 54, 82, 61, 
+Tovornjak: 23, 21, 49, 
+Tovornjak: 76, 
+Tovornjak: 48, 
+Tovornjak: 67, 
+Tovornjak: 32, 92, 79, 
+Tovornjak: 14, 
+Tovornjak: 31, 74, 
+Tovornjak: 90, 
+Tovornjak: 99, 
+Tovornjak: 76, 72, 70, 
+Tovornjak: 11, 48, 92, 8, 
+Tovornjak: 69, 74, 
+Tovornjak: 52, 99, 31, 
+Tovornjak: 78, 
+Tovornjak: 74, 41, 
+Tovornjak: 76, 
+Tovornjak: 15, 14, 40, 
+Tovornjak: 58, 94, 69, 62, 
+Tovornjak: 73, 
+Tovornjak: 18, 57, 92, 
+Tovornjak: 75, 95, 37, 84, 81, 
+Tovornjak: 53, 
+Tovornjak: 28, 
+Tovornjak: 60, 
+Tovornjak: 32, 92, 
+Tovornjak: 100, 
+Tovornjak: 91, 
+Tovornjak: 40, 12, 
+-------------------------
+==================================
+Povezava ne obstaja 0 --> 49
+==================================
+Enako prejsnjemu
+==================================
+Povezava ne obstaja 0 --> 88
+Povezava ne obstaja 88 --> 0
+==================================
+Povezava ne obstaja 0 --> 36
+Povezava ne obstaja 36 --> 0
+==================================
+==================================
+Povezava ne obstaja 0 --> 77
+==================================
+==================================
+==================================
+==================================
+Povezava ne obstaja 0 --> 56
+Povezava ne obstaja 56 --> 10
+==================================
+Povezava ne obstaja 92 --> 51
+Povezava ne obstaja 51 --> 89
+==================================
+Enako prejsnjemu
+Enako prejsnjemu
+==================================
+Povezava ne obstaja 0 --> 51
+==================================
+Povezava ne obstaja 28 --> 0
+Placamo delavce dvojno
+==================================
+==================================
+Povezava ne obstaja 30 --> 49
+Povezava ne obstaja 49 --> 0
+==================================
+Povezava ne obstaja 0 --> 97
+Povezava ne obstaja 41 --> 0
+==================================
+Povezava ne obstaja 0 --> 42
+Povezava ne obstaja 42 --> 38
+==================================
+Povezava ne obstaja 0 --> 55
+Povezava ne obstaja 55 --> 32
+==================================
+Povezava ne obstaja 0 --> 8
+Povezava ne obstaja 8 --> 0
+==================================
+Povezava ne obstaja 0 --> 13
+Povezava ne obstaja 13 --> 0
+==================================
+Povezava ne obstaja 0 --> 77
+Povezava ne obstaja 77 --> 45
+==================================
+Povezava ne obstaja 58 --> 0
+Placamo delavce dvojno
+==================================
+Povezava ne obstaja 9 --> 88
+Povezava ne obstaja 88 --> 0
+==================================
+==================================
+Povezava ne obstaja 0 --> 37
+Tovornjak pretezek 48 --> 0
+==================================
+Placamo delavce dvojno
+==================================
+Povezava ne obstaja 47 --> 60
+Povezava ne obstaja 60 --> 4
+Povezava ne obstaja 4 --> 0
+Enako prejsnjemu
+==================================
+Povezava ne obstaja 60 --> 17
+Povezava ne obstaja 17 --> 0
+==================================
+Povezava ne obstaja 0 --> 42
+Povezava ne obstaja 42 --> 0
+==================================
+Povezava ne obstaja 0 --> 74
+Povezava ne obstaja 55 --> 0
+==================================
+Povezava ne obstaja 73 --> 92
+==================================
+Povezava ne obstaja 0 --> 16
+==================================
+==================================
+Enako prejsnjemu
+==================================
+Povezava ne obstaja 3 --> 27
+Povezava ne obstaja 22 --> 0
+==================================
+Povezava ne obstaja 19 --> 0
+==================================
+Povezava ne obstaja 67 --> 0
+==================================
+Povezava ne obstaja 0 --> 22
+Povezava ne obstaja 22 --> 33
+Povezava ne obstaja 33 --> 45
+==================================
+==================================
+==================================
+Povezava ne obstaja 82 --> 0
+==================================
+Povezava ne obstaja 0 --> 2
+Povezava ne obstaja 2 --> 0
+==================================
+Povezava ne obstaja 0 --> 84
+Povezava ne obstaja 84 --> 0
+==================================
+==================================
+==================================
+Povezava ne obstaja 0 --> 84
+Povezava ne obstaja 20 --> 0
+==================================
+==================================
+Povezava ne obstaja 0 --> 98
+Povezava ne obstaja 65 --> 62
+Povezava ne obstaja 62 --> 0
+==================================
+Povezava ne obstaja 11 --> 64
+Povezava ne obstaja 12 --> 0
+==================================
+==================================
+Povezava ne obstaja 0 --> 62
+Povezava ne obstaja 62 --> 0
+==================================
+Povezava ne obstaja 0 --> 20
+Povezava ne obstaja 20 --> 0
+==================================
+==================================
+Povezava ne obstaja 76 --> 0
+==================================
+Povezava ne obstaja 78 --> 0
+==================================
+Povezava ne obstaja 0 --> 42
+Povezava ne obstaja 42 --> 0
+==================================
+Povezava ne obstaja 0 --> 76
+Povezava ne obstaja 76 --> 2
+==================================
+==================================
+Povezava ne obstaja 0 --> 95
+Povezava ne obstaja 95 --> 0
+==================================
+Povezava ne obstaja 0 --> 16
+Povezava ne obstaja 81 --> 0
+==================================
+==================================
+Povezava ne obstaja 0 --> 39
+Povezava ne obstaja 39 --> 0
+==================================
+Povezava ne obstaja 82 --> 0
+==================================
+Povezava ne obstaja 0 --> 86
+Povezava ne obstaja 86 --> 0
+==================================
+==================================
+==================================
+==================================
+Povezava ne obstaja 0 --> 28
+Povezava ne obstaja 28 --> 0
+==================================
+Povezava ne obstaja 0 --> 29
+Povezava ne obstaja 29 --> 0
+==================================
+==================================
+Povezava ne obstaja 75 --> 10
+Povezava ne obstaja 60 --> 0
+Placamo delavce dvojno
+==================================
+Povezava ne obstaja 0 --> 22
+Povezava ne obstaja 20 --> 48
+Tovornjak pretezek 48 --> 0
+==================================
+==================================
+==================================
+==================================
+Povezava ne obstaja 31 --> 91
+Povezava ne obstaja 78 --> 0
+==================================
+Povezava ne obstaja 0 --> 13
+Povezava ne obstaja 13 --> 0
+==================================
+Povezava ne obstaja 30 --> 73
+==================================
+Povezava ne obstaja 0 --> 89
+Povezava ne obstaja 89 --> 0
+==================================
+Povezava ne obstaja 0 --> 98
+Povezava ne obstaja 98 --> 0
+==================================
+Povezava ne obstaja 75 --> 71
+==================================
+Povezava ne obstaja 47 --> 91
+==================================
+==================================
+Povezava ne obstaja 0 --> 51
+Povezava ne obstaja 98 --> 30
+==================================
+Povezava ne obstaja 0 --> 77
+Povezava ne obstaja 77 --> 0
+==================================
+Povezava ne obstaja 73 --> 40
+Povezava ne obstaja 40 --> 0
+==================================
+==================================
+Povezava ne obstaja 39 --> 0
+==================================
+Povezava ne obstaja 57 --> 93
+Povezava ne obstaja 61 --> 0
+==================================
+==================================
+Povezava ne obstaja 0 --> 17
+Povezava ne obstaja 56 --> 91
+==================================
+Povezava ne obstaja 0 --> 74
+Placamo delavce dvojno
+==================================
+Povezava ne obstaja 0 --> 52
+Povezava ne obstaja 52 --> 0
+==================================
+==================================
+==================================
+Povezava ne obstaja 31 --> 91
+==================================
+Povezava ne obstaja 0 --> 99
+Povezava ne obstaja 99 --> 0
+==================================
+Povezava ne obstaja 0 --> 90
+Povezava ne obstaja 90 --> 0
+==================================
+Povezava ne obstaja 0 --> 39
+NISMO POBRALI VSEGA!

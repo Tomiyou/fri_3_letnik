@@ -1,0 +1,16 @@
+Package managers:
+https://medium.com/@sdboyer/so-you-want-to-write-a-package-manager-4ae9c17d9527
+https://devopedia.org/package-manager
+https://www.reddit.com/r/learnprogramming/comments/3kl4fn/what_goes_into_making_a_package_manager/
+
+APT:
+https://en.wikipedia.org/wiki/APT_(software)
+https://askubuntu.com/questions/58364/whats-the-difference-between-multiverse-universe-restricted-and-main
+https://askubuntu.com/questions/540937/what-does-apt-get-install-do-under-the-hood
+https://www.tecmint.com/useful-basic-commands-of-apt-get-and-apt-cache-for-package-management/
+https://www.quora.com/How-exactly-does-the-sudo-apt-get-install-package-work-in-Linux
+https://unix.stackexchange.com/questions/377736/how-does-apt-get-really-work
+https://codeburst.io/a-beginners-guide-to-using-apt-get-commands-in-linux-ubuntu-d5f102a56fc4
+
+Create .deb package:
+https://linuxconfig.org/easy-way-to-create-a-debian-package-and-local-package-repository

@@ -1,0 +1,13 @@
+- generiramo random zacetek
+  stevilo tovornjakov = 2 * (vsiOdpadki / kapaciteta)
+  preprost dodajamo node, dokler je se pod 8 ur celotna pot (vkljucno s koncno) za VSAK tovornjak
+
+- generiramo random sosede, probamo
+  - node preprost flippat
+  - swappat z ostalimi
+  - swappamo več nodov na enkrat
+  - odstranimo node
+  - dodamo node
+
+- ocena
+

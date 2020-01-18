@@ -1,0 +1,62 @@
+Zakaj package manager?
+1. Enostavno vzdrževanje velike količine aplikacij/knjižnic
+2. Konsistenca med verzijami in odvisnostmi odvisnosti (rekurzivno)
+3. Ponovna raba kode
+
+APT (advanced package tool) nam poenostavi prenos, konfiguracijo in namestitev paketov iz repozitorijev. Paketi so lahko precompiled ali pa jih mora apt sam compajlati. Za sam package manager so repozitoriji enako pomembni kot sama orodja, ki s paketi upravljajo, zato bomo pogledal tud same repozitorije. Njihovi "maintainerji" skrbijo zato konsistenco med paketi, da uporabnikom ni treba. Zato se lahko zgodi, da čeprav uporabljamo najnovejši stable release distro-ja (npr. Ubuntu), so paketi stari, ker bi lahko dependenciji tega paketa prišli v nekompatibilnost (en paket rabi novejšo verzijo nekega paketa x, drug paket pa ne deluje s to novejšo verzijo)
+
+- repositoriji
+	Nič posebnega, samo strukturiran filesystem, ki je dostopen preko HTTP oz FTP. Ko inštaliramo ubuntu, nam razvijalci zagotavljajo kompatibilnost in vse potrebne pakete za specifičen release ubuntu (npr 18.04). Ti repozitoriji so specificirani v /etc/apt/sources.list (daj kr cat) (Officially supported software. Supported software that is not available under a completely free license. Community maintained software, i.e. not 	officially supported software. Software that is not free.) Te repozitorije nam da ubuntu, ppaje dodamo sami, ko hočemo paket izven ubuntu/debian ekosistema, moramo samo skrbeti za kompatibilnost z verzijami. Vsi imajo pakete v obliki .deb datoteke.
+
+- apt-get update
+	Paketi so na repozitorijih, zato moramo poizvediti kateri so nam na voljo. Update gre čez vse repozitorije in v /var/lib/apt/lists zapiše kaj vse ima na voljo, zato je potrebno to pognati lastnoročno (18.04+ ubuntu sam požene ko dodamo repozitorji). Primer: http://http.us.debian.org/debian/dists/stretch/main/binary-amd64/Packages.xz (stisnjena mapa, ki vsebuje 1 samo datoteko, ki ima ogromen list paketov ter njihove odvisnosti in ostale metapodatke. Vsebuje RELATIVNE poti do paketov na temu repozitoriju)
+
+- apt-get install <package>
+	1. Apt najprej pogleda v listih ki jih je zgradil v apt-get update, ali je paket na voljo v katerem izmed repozitorijev. 
+	Če najde paket, začne z dependency rezolucijo. Zgradi rekurzivno drevo odvisnosti (ne uporablja samo ime paketa, ampak tudi verzijo paketa), dokler ne pride do paketov, ki nimajo nobene odvisnosti.
+	2. Nato pogleda, kateri paketi so bili že inštalirani ali pa so bili že preneseni v predpomnilnik.
+	3. Generirajo se poti do paketov v repozitoriju, nato se paketi prensejo. Po prenosu se verificirajo (checksum)
+	4. Nato apt preko dpkg-ja (program ki zna upravljati z .deb datotekami) inštalira prenesene pakete.
+- dpkg
+	.deb datoteke so preprosto stisnjene datoteke, ki vsebujejo vse datoteke (tud te so stisnjene) ki se bodo "inštalirale" na sistem (v principu se samo razširijo v root mapo /). Poženejo se package maintainer skripte: preinst(preden se datoteke inštalirajo v filesystem)/postinst, ter prerm/postrm. Ponavadi so to bash skripte, ni pa nujno. Ko se packagi posodabljajo, se najprej pokliče remove, potem install, tako je celoten postopek poenostavljen. Vsebujejo še druge kontrolne datoteke (control: seznam odvisnosti, conffiles: config datoteke, debian-binary: verzija .deb datoteke, md5sums: seznam md5sums za vsako datoteko v tem .deb, templates: opisi error kod).
+
+Primer (sprehod po http://http.us.debian.org/debian/):
+- sources.list vsebuje "deb http://http.us.debian.org/debian/ stretch main"
+- apt preko dpkg-ja pridobi arhitekturo (arch) sistema
+- sedaj lahko zgradi "http://http.us.debian.org/debian/dists/stretch/main/binary-amd64/Packages.xz" - vsebuje opise paketov (ime, verzija, dependency, metapodatki)
+
+Primer:
+
+Package: vim
+Version: 2:8.0.0197-4+deb9u3
+Installed-Size: 2374
+Maintainer: Debian Vim Maintainers <pkg-vim-maintainers@lists.alioth.debian.org>
+Architecture: amd64
+Provides: editor
+Depends: vim-common (= 2:8.0.0197-4+deb9u3), vim-runtime (= 2:8.0.0197-4+deb9u3), libacl1 (>= 2.2.51-8), libc6 (>= 2.15), libgpm2 (>= 1.20.4), libselinux1 (>= 1.32), libtinfo5 (>= 6)
+Suggests: ctags, vim-doc, vim-scripts
+Description: Vi IMproved - enhanced vi editor
+Homepage: http://www.vim.org/
+Description-md5: 59e8b8f7757db8b53566d5d119872de8
+Tag: devel::editor, implemented-in::c, interface::commandline,
+ interface::text-mode, role::program, scope::application,
+ uitoolkit::ncurses, use::editing, works-with::text, works-with::unicode
+Section: editors
+Priority: optional
+Filename: pool/main/v/vim/vim_8.0.0197-4+deb9u3_amd64.deb
+Size: 1034192
+MD5sum: ce382c6e6164d692b5520a2627276a71
+SHA256: 103b4aee492365123f3762d5f03ccd4d79783a89642733999896d6ef4e5b9a3a
+
+- v Packages.xz najde RELATIVNE poti do paketa, npr: "pool/main/0/0ad/0ad_0.0.21-2_amd64.deb"
+- s to relativno potjo in zapisom v sources.list zgradi url paketa "http://http.us.debian.org/debian/pool/main/v/vim/vim_8.0.0197-4+deb9u3_amd64.deb"
+- poleg binary-* imamo še source, kjer so source datoteke
+
+
+apt-get update: posodobi /var/lib/apt/lists
+apt-get upgrade: posodobi instalirane package
+apt-get dist upgrade: posodobi distribucijo (basically prevzame nadzor nad sistemom in ter posodablja pakete (s paketi pride tud konfiguracija), tud če bi lahko povzročil začasnin konflikt verzij paketov)
+apt-get purge: ne odstrani samo paketa, ampak tudi konfiguracije tega paketa znotraj /etc mape
+apt-cache search: queryamo po bazi podatkov (če obstaja + informacije)
+
+Kako narediti svoj paket

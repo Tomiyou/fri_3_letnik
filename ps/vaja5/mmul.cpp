@@ -30,10 +30,14 @@ unsigned long long getTime() {
 }
 
 int main() {
-  int hA = 47;
-  int wA = 513;
-  int hB = 513;
-  int wB = 81;
+  int hA = 9;
+  int wA = 8;
+  int hB = 8;
+  int wB = 9;
+  // int hA = 47;
+  // int wA = 513;
+  // int hB = 513;
+  // int wB = 81;
 
   float *A = (float *)malloc(hA * wA * sizeof(float));
   float *B = (float *)malloc(hB * wB * sizeof(float));

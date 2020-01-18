@@ -1,0 +1,25 @@
+Veliko različnega hardwera, brez skupnega apija za vse, vsaka platforma potrebuje svoj razvoj in znanje. OneAPI: knjižnice, DPC++, orodja. Predpostavlja se, da je koda prenosljiva prek vseh platform k uporabljamo OneAPI (se pravi dela), to pa še ne pomeni da dela optimalno na vsaki platformi. Ideja je da lahko hitro izdelamo funkcionalno kodo, potem pa se lahko spustimo v specifike in optimizacijo za določeno platformo z uporabo nekega tune profilerja, ki nam pove kateri del kode je bottleneck (ker bi blo optimalno kodo narest brez te specifične kodo za platforme praktično nemogoče).
+- produktivnost: manj boilerplate kode in preprostejše pisanje kode
+- performance: programer naj ima kontrolo nad izvajanjem, prav tako lahko programer uporablja hardware-specifične featurje
+
+DPC++ = Data Parallel C++ = C++ + SYCL* + razširitve
+
+Cilj je da bi bil DPC++ podprt v LLVM.
+
+"Single source" programing model -> vsa koda zapisana v eni datoteki, še bolj kot to je TYPE SAFE. Vsa paralelna koda se zanaša samo na klice knjižnice, kar pomeni da lahko navadni c++ compilerji to kodo prevedejo.
+
+
+
+
+Še zmerej kerneli, samo ni več eksplicitne definicije kernela, ampak lambda funkcije.
+
+Vsak queue -> točno en device (lahko izbiramo kater, tudi CPU za debugging)
+Hierarhičen dependency graf za izvajanje: podobno zaklepanju datotek, write access je exclusive, read access je lahko več na enkrat, če noben ne piše. Tako nam ni treba skrbeti za vrstni red, ker lahko compiler sam pogrunta kateri kerneli se lahko izvajajo na enkrat.
+Pokaž un graf k se vid da oneapi sam pogrunta kdo je na vrst pa sam skopira memory.
+
+Ko dodamo kernel v queue, predamo kontrolo nad kernelom SYCL runtimu, kar pomeni da CPU nadaljuje asinhrono naprej. Šele takrat ko zahtevamo dostop do bufferja, se CPU ustavi in počaka zaradi zgornjega grafa.
+
+Sinhronizacija je vezana na SCOPE. Podatki, ki smo jih prek bufferjev uporabljali v kernelih, so vidni šele PO izhodu is scopa, ker takrat niso več last SYCL runtima.
+
+
+Lahko uporabljamo direktne dostope preko malloc_shared, ampak potem nimamo več avtomatskega dependency grafa, moramo sami dati ukaz q.wait() (vse kar smo do sedaj dali v queue, se mora končati)

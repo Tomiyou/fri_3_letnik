@@ -1,0 +1,121 @@
+Dinamično izvajanje programov
+- globalni podatki
+- globalna koda
+- povezovanje objektov
+- sistemska neodvisnost
+  => vmesna koda
+     - ustvari jo prevajalnik
+     - naredi sistemsko neodvisne optimizacije
+
+Prednosti
+- varnost
+- prenosljivost
+- majhno št. prevajalnikov
+  N prog. jezikov
+  M procesorjev
+  => običajno N*M
+  => jezik -> vmesna koda -> procesor: M+N
+    j1
+    j2                    p1
+    .     |Vmesna koda|   p2
+    .                     .
+    jn                    pm
+
+Zgodovina
+- 1970  ETH Pascal
+- 1991  ... Java
+  => Sun, IBM, Oracle, Microsoft, ...
+  => Ideja jave je: "write once, run everywhere"
+- 2000  .Net, C#
+
+
+Javina arhitektura
+- programski jezik java
+- API
+- format razrednih zbirk (class )
+- JVM (javanski navidezni stroj)
+  => izvaja zložno kodo
+  => začetni razredni nalagalnik + izvajalnik (interpreter)
+
+Java interpreter
+- vsakič znova
+- sprotno prevajanje (just in time/JIT)
+  => ob prvem klicu metode, se ta prevede in optimizira in prevod shrani
+- prilagodljivo optimiranje (adaptive ptimization)
+  => pogosto izvajano kodo (20% kode ki teče 80% časa) prevedemo, ostalo (80%) je interpretirano sproti
+
+Izvajanje programov
+- satični svet: prevajanje -> povezovanje -> nalaganje -> izvajanje
+- javanski svet:
+  => prevajanje (javac: java -> byte code = strojna koda za JVM)
+  => nalaganje
+  => izvajanje
+  => povezovanje (šele v času izvajanje ugotovi, katere komponente mora povezat -> to omogoča dinamičen princip jave)
+
+==> Nalaganje
+    - na poljubno lokacijo
+    - simboli !!!
+
+Razreševanje simboličnih imen:
+  - zgodnje: vse reference se razrešijo takoj po nalaganju
+  - pozno: razreševanje ob uporabi
+  - vmesna možnost: JVM razrešuje, ko ima čas
+  - !pomembno: uporabnikška izkušnja mora biti v vsakem primeru kot pri poznem razreševanju
+
+Razredne zbirke
+- ekvivalentno objektnim datotekam
+- binarne datoteka
+- 1 bjata
+- big endian
+- nabor konstant (constant pool)
+- koda
+- atributi
+1000011
+classfile {
+  u4  magic;
+  u2  minor_version;
+  u2  major_version;
+  u2  const_pool_count;
+  cp_info constant_pool[const_pool_count - 1];
+  u2  this_class;
+  u2  super_class;
+  interfaces
+  fields
+  methods
+  attributes
+}
+
+cp_info {
+  u1  tag;
+  u1  info[];
+}
+
+Tag   |   Tip       |   Dolžina
+---------------------------------------
+1     | UTF_8       | 2(len) = len
+3     | Integer     | 4
+4     | Float       | 4
+5     | Long        | 4 + 4
+6     | Double      | 4 + 4
+7     | Class       | 2
+8     | String      | 2
+9     | Field_ref   | 2 + 2
+10    | Method_ref  | 2 + 2
+11    | Integer_ref | 2 + 2
+12    | NameAndType | 2 + 2
+
+
+Deskriptorji .... opis podatkovnega tipa
+  B ... byte
+  C ... char
+  D ... double
+  F ... float
+  I ... int
+  J ... long
+  S ... short
+  Z ... boolean
+  V ... void
+
+
+
+

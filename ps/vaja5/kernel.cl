@@ -109,7 +109,14 @@ __kernel void longMultiply(__global float *A,
 
             float sum = 0;
             for (int k = 0; k < WORKGROUP_SIZE; k++) {
+		        if (gy == 0 && gx == 0) {
+                    printf("%f:%f, ", As[ly][k], Bs[k][lx]);
+                }
                 sum += As[ly][k] * Bs[k][lx];
+            }
+
+	    if (gy == 0 && gx == 0) {
+                printf("\n");
             }
 
             if (i * WORKGROUP_SIZE + ly < heightA && j * WORKGROUP_SIZE + lx < widthB) {

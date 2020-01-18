@@ -1,0 +1,1 @@
+docker run --device=/dev/dri -v /home/tomi/random/fri_3_letnik/ps/seminarska/docker/:/app -it intel/oneapi-basekit
