@@ -15,10 +15,16 @@ Description: Print linuxconfig.org on the screen
 
 mkdir -p linuxconfig/usr/bin/
 cp /path/to/our/executable linuxconfig/usr/bin/
-dpkg-deb --build linuxconfig
 mv linuxconfig.deb linuxconfig-1.0_amd64.deb
 sudo cp /path/to/linuxconfig-1.0_amd64.deb /var/www/html/debian/
 cd server && http-server -a localhost -p 80
 cd server/debian
+
+
+
+
+dpkg-deb --build spoapt
+// rename package
+http-server -a localhost -p 80
 dpkg-scanpackages . | gzip -c9  > Packages.gz
-echo "deb [trusted=yes] http://10.1.1.4/debian ./" | tee -a /etc/apt/sources.list > /dev/null
+echo "deb [trusted=yes] http://127.0.0.1/ubuntu ./" | sudo tee -a /etc/apt/sources.list > /dev/null

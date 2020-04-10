@@ -1,0 +1,18 @@
+c #to je identifier
+'c'  #to je char
+'1'		#to je char
+!	#to je klicaj
+	'!'         #to je char
+
+boolean _a_ = true
+
+char _ = '_'
+char string = "To je string!"
+boolean _0_ = "true"
+	boolean true = true
+nil #to ni identifikator ampak pointer
+none true false 
+123 0 09
+boolean char del do else fun if integer new then typ vcar void where while
+( ) { } [ ] . , : ; & | ! == != < > <= >= * / % + - ^ =
+# to je malo drugacen komentar

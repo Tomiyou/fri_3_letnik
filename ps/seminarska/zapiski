@@ -23,3 +23,14 @@ Sinhronizacija je vezana na SCOPE. Podatki, ki smo jih prek bufferjev uporabljal
 
 
 Lahko uporabljamo direktne dostope preko malloc_shared, ampak potem nimamo več avtomatskega dependency grafa, moramo sami dati ukaz q.wait() (vse kar smo do sedaj dali v queue, se mora končati)
+
+
+
+
+
+
+
+Uporabljamo lahko dostopnike ali pa sami rezerviramo pomnilnik z malloc_shared ter dostopamo kot do vsakega drugega rezerviranega pomnilnika (pointer_na_mem[i]), vendar moramo potem sami sinhronizirati dostop do pomnilnika. Če bi uporabljali dostopnike, bi OneAPI sam zgradil graf odvisnosti in ustrezno poskrbel za sinhronizacijo in paralelno izvajanje ščepcev, ki ne potrebujejo istih podatkov.
+
+Ideja je da lahko hitro izdelamo funkcionalno kodo, potem pa se lahko spustimo v specifike in optimizacijo za določeno platformo
+"Single source" programing model -> vsa koda zapisana v eni datoteki, še bolj kot to je TYPE SAFE. Vsa paralelna koda se zanaša samo na klice knjižnice, kar pomeni da lahko navadni c++ compilerji to kodo prevedejo.

@@ -1,0 +1,50 @@
+#typ tretjiTip = ^drugiTip
+#typ drugiTip = prviTip
+#typ prviTip = void
+#
+typ mojStruct1 = { field1 : char, field2 : integer, field3 : boolean, mojVoid: ^char }
+#typ mojStruct2 = { ff1 : char, ff2 : integer, ff3 : boolean, mojPtr: mojStruct1 }
+#typ mojArray = integer[10]
+#typ lelele = tretjiTip[10][5 * 12][7]
+
+var test : integer
+#var seznam : mojArray
+#var objekt : mojStruct2
+
+#fun func_complex(a: integer, b: boolean, c: ^char): integer = {
+#  seznam[10];
+#  objekt.mojPtr.mojVoid;
+#  a = 10;
+#  func_complex(10, false, c);
+#  #!^129 + 229 * 10 - 8 != 10 + 7 & 10 | 12; # ((((129 + 229) - 10) - 8) + 10) + 7;
+#  #func_complex();
+#}
+
+fun simple(): integer = {
+  func_beast(20, 20);
+  kkkkkk(10);
+}
+
+fun func_beast(cc: integer, ee: integer): integer = {
+  bb.ff3.field3;
+  cc = 10;
+  simple();
+} where {
+  typ mojStruct2 = { ff1 : boolean, ff2 : integer, ff3 : mojStruct1, mojPtr: ^void }
+  var bb : mojStruct2
+  fun simple(): integer = {
+    func_beast(20, 20);
+    kkkkkk(10);
+  } where {
+    var bb : boolean
+  }
+}
+
+fun kkkkkk(cc: integer): integer = {
+  test = 10;
+  test + 10;
+  cc + 10;
+} where {
+  typ mojStruct2 = { ff1 : boolean, ff2 : boolean, ff3 : boolean, mojPtr: ^void }
+  var bb : mojStruct2
+}

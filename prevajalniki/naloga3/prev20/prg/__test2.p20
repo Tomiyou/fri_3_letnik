@@ -1,0 +1,39 @@
+#normal declarations
+typ identifier = type
+typ identifier = type   
+
+#function
+fun main(): boolean = {
+
+    test.one.two.three;
+    #CHECK THAT POSTFIX HAS HIGHER PRIORITY THEN PREFIX
+    -+postfix_vs_prefix^.check.xml^^;
+    
+    hahaha; #identifier
+
+    1+2*3/4%56>7&8!=9; #expr
+
+    #if else
+    if neki[4][2] then {
+
+        ja.ne.nevem[1][2]^.tri[4]^^^; #postfix
+
+        funcall(ja, xD[11], 12/5); #funcall
+
+        znj = a() + 6;
+    }
+    else return;
+
+    #while with a spicy expr, also prefixs
+    while ^pointer != !!!^-^+^^(upimo-da+to%dela) do {
+        123;
+    };
+
+#where with some more complex declarations
+} where {
+    typ identifier = {id1: type1, no: da, vidmo: {ce:to, dejansko: dela}}
+    typ identifier = boolean
+    var identifier : type
+    var identifier : ^^boolean[1][2]   
+}
+

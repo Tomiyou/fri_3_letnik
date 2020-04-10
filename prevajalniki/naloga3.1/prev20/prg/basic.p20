@@ -1,0 +1,9 @@
+typ prviTip = void
+typ drugiTip = void
+fun func_complex(a: integer, b: boolean, c: integer): integer = {
+  _blabla.omg.test[10];
+  !^129 + 229 * 10 - 8 != 10 + 7 & 10 | 12; # ((((129 + 229) - 10) - 8) + 10) + 7;
+  func_complex();
+}
+typ hihihehe = { field1 : char, field2 : integer, field3 : boolean }
+typ lelele = char[10][5 * 12][7]

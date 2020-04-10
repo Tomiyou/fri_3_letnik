@@ -1,0 +1,28 @@
+typ typ_name = ^void
+var _var_name : (char)
+var _arr_var: integer[10]
+typ _json_struct = {
+    name: char[x],
+    surname: char[y]
+}
+
+# Dummy function for returning true value
+fun func() : void = true
+fun func_complex(a: integer, b: boolean): integer = {
+    while (test == 3 & x + y * 7 <= 15 | true & !(!x != y) | b / 5 == - 7 + y + x) do {
+        if (x % 3 >= 1) then {
+            x = y % 4;
+            y = x * 3 * math.pi;
+        } else (_varName : integer);
+    };
+}
+
+# Our main method.
+fun main(arg: integer): ^_jsonStruct = {
+    funcComplex(a, b);
+    _jsonStruct = new _jsonStruct;
+    (del _jsonStruct);
+    (t+3)[z];
+    _jsonStruct.name = _jsonStruct.name^ where { var name: char[10] };
+}
+

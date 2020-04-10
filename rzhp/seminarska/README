@@ -1,0 +1,5 @@
+Lokalno preiskovanje: za poganjanje algoritma je potrebno odkomentirati vrstice od 7 do 28. Zadnja stevilka v vsakem klicu je indeks odpadkov (0 = organski, 1 = plastika , ...).
+Algoritem ne dela za probleme od 7. do 10. zaradi preostanka neveljavnih poti v rešitvi (razloženo v poročilu)
+
+Požrešni algoritem: Organic je greedy rešitev, deluje na malo modificaranih podatkih, ki so priloženi v Problem10organic
+za plastic in paper sta programa zelo podobna, z malo spremenjenim izpisom, ostalo je vse enako

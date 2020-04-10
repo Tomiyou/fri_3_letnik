@@ -1,0 +1,14 @@
+Stmt - left factor Expr
+Type - remove immediate left recursion
+Type' - epsilon separate
+Expr - remove immediate left recursion
+Expr - left factor ( Expr
+
+
+Od zgori navzdol
+Remove immediate recursion
+Left factor identifier
+Left factor ( Expr
+Remove immediate recursion
+Left factor Expr
+Pol pa

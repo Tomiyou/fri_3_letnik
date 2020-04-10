@@ -1,0 +1,5 @@
+fun f1(i1:integer):integer = i1+f1(i1)+f2(i2)
+    where {
+    	  var i2:integer
+	  fun f2(i2:integer):integer = i1+i2+f1(i1)+f2(i2)
+    }

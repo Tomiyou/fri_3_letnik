@@ -1,0 +1,3 @@
+typ int=integer
+var i:char
+fun f(i:int):int=i+c where { var c:char }

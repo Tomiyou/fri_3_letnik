@@ -1,0 +1,39 @@
+# Type a grammar here:
+
+Prg -> Decl Decl1 .
+Decl1 -> Decl Decl1 | .
+Decl -> typ identifier = Type .
+Decl -> var identifier : Type .
+Decl -> fun identifier ( FunD ) : Type = Expr .
+FunD -> identifier : Type RecordT | .
+
+Type -> void | char | integer | boolean .
+Type -> identifier .
+Type -> Type [ Expr ] .
+Type -> ^ Type .
+Type -> { identifier : Type RecordT } .
+RecordT -> , identifier : Type RecordT | .
+Type -> ( Type ) .
+
+Expr -> const .
+Expr -> identifier .
+Expr -> identifier ( FunE1 ) .
+FunE1 -> Expr FunE2 | .
+FunE2 -> , Expr FunE2 | .
+Expr -> new Expr | del Expr .
+Expr -> { Stmt ; CompE } .
+CompE -> Stmt ; CompE | .
+Expr -> ( Expr : Type ) .
+Expr -> ( Expr ) .
+Expr -> Expr InfixE Expr .
+InfixE -> & | or | == | != | < | > | <= | >= | * | / | % | + | - .
+Expr -> PrefixE Expr .
+PrefixE -> ! | + | - | ^ .
+Expr -> Expr PostfixE .
+PostfixE -> [ Expr ] | ^ | pika identifier .
+Expr -> Expr where { Prg } .
+
+Stmt -> Expr .
+Stmt -> Expr = Expr .
+Stmt -> if Expr then Stmt else Stmt .
+Stmt -> while Expr do Stmt .

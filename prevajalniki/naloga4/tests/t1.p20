@@ -1,0 +1,12 @@
+# le z where 
+#var id : neki [ 123 where { var id3 : 5 }]
+#123 where { var id3 : 5 }
+fun func_complex(a: integer, b: boolean, c: integer): integer = {
+  123 where { typ id3 = void };
+}
+
+
+
+
+
+

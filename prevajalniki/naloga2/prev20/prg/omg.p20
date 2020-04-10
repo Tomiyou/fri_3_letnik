@@ -1,0 +1,19 @@
+typ id3 = void
+
+fun func_complex(a: integer, b: boolean, c: integer): integer = {
+  123 where { typ id3 = void };
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

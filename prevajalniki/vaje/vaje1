@@ -1,0 +1,29 @@
+stack       input       output              E => TE' => FT'E' => nT'E' => nE' => n+TE'
+E           n+n*n$      E -> TE'
+E'T         n+n*n$      T -> FT'
+E'T'F       n+n*n$      F -> n
+E'T'n       n+n*n$
+E'T'        +n*n$       T' -> epsilon
+E'          +n*n$       E' -> +TE'
+E'T+        +n*n$
+E'T         n*n$
+
+
+Handwriten parser
+E,E',T,T',F .... means 5 recursive methods
+
+E' -> epsilon | +TE' ... 2 productions of one symbol == 2 switch cases
+        ^        ^
+        |        |
+        $        +
+
+void parse_E'() {
+  switch (lookupNextSymbol()) {
+    case $: return;
+    case +: advanceInput();
+            parseT();
+            parseE'();
+            return;
+    default: error();
+  }
+}

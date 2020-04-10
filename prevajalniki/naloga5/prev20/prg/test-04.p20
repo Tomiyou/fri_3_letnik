@@ -1,0 +1,3 @@
+var i:integer
+var p:^integer
+fun f():integer=i+p

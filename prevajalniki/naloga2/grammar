@@ -1,0 +1,65 @@
+Prg -> Decl DeclRepeat .
+DeclRepeat -> Decl DeclRepeat .
+DeclRepeat -> .
+Decl -> typ identifier = Type .
+Decl -> var identifier : Type .
+Decl -> fun identifier ( FunD ) : Type = Expr .
+FunD -> identifier : Type TypeRepeat .
+FunD -> .
+
+
+
+Type -> void Type' .
+Type -> char Type' .
+Type -> integer Type' .
+Type -> boolean Type' .
+Type -> identifier Type' .
+Type -> ^ Type Type' .
+Type -> { identifier : Type TypeRepeat } Type' .
+Type -> ( Type ) Type' .
+Type' -> [ Expr ] Type' .
+Type' -> .
+TypeRepeat -> , identifier : Type TypeRepeat .
+TypeRepeat -> .
+
+
+
+RelOps -> == | != | < | > | <= | >= .
+AddOps -> + | - .
+MulOps -> * | / | % .
+PrefOps -> ! | + | - | ^ .
+PostOps -> [ Expr ] | ^ | pika identifier .
+
+Expr -> const .
+Expr -> identifier FunCall .
+FunCall -> ( FunCallArg ) | .
+FunCallArg -> Expr FunCallArgExtra | .
+FunCallArgExtra -> , Expr FunCallArgExtra | .
+Expr -> new Expr | del Expr .
+Expr -> { Stmt ; CompRepeat } .
+CompRepeat -> Stmt ; CompRepeat | .
+Expr -> ( Expr CastE ) .
+CastE -> : Type | .
+
+Expr -> ExprDis where { Prg } .
+ExprDis -> ExprCon ExprDis' .
+ExprDis' -> or ExprCon ExprDis' | .
+ExprCon -> ExprRel ExprCon' .
+ExprCon' -> & ExprRel ExprCon' | .
+ExprRel -> ExprAdd ExprRel' .
+ExprRel' -> RelOps ExprAdd ExprRel' | .
+ExprAdd -> ExprMul ExprAdd' .
+ExprAdd' -> AddOps ExprMul ExprAdd' | .
+ExprMul -> ExprPre ExprMul' .
+ExprMul' -> MulOps ExprPre ExprMul' | .
+
+ExprPre -> ExprPre' ExprPost .
+ExprPre' -> PrefOps | .
+ExprPost -> Expr ExprPost' .
+ExprPost' -> PostOps | .
+
+Stmt -> Expr Stmt' .
+Stmt' -> .
+Stmt' -> = Expr .
+Stmt -> if Expr then Stmt else Stmt .
+Stmt -> while Expr do Stmt .

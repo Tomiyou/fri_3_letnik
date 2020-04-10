@@ -1,0 +1,182 @@
+typ int = integer
+var id : int
+typ record = {i1: int, i2: int}
+var r1 : record
+var neki: ^int
+var arr : int[10]
+
+
+fun main(): int = r1.i1  # tu je + const(0)  PRIMER RECORD
+fun main22(): int = r1.i2  # tu more bit CONST(veliostu 1. komp)  PRIMER RECOR2
+fun main2(): integer = bla where {var bla: int}   # PRIMER Z WHERE
+fun ptr() : ^integer = neki
+fun array(): int =    arr[0] 		# PRIMER Z ARRAY 1
+fun aray2(): int =   arr[10]	# PRIMER Z ARRAY 2: mora biti 1 add, 1 mul
+
+var a: int
+fun f(i:int) : integer = {
+	a= i; 
+	a+1;
+}
+fun f1(i: int) : int = a+1
+fun f2(i: int) : void = {a= i;}
+#fun f22(i: int) : void = {2= 3;}  # to lvalue zavrnejo
+
+# posebej: vracamo spremenljivko: iz where, zunanjo, parameter
+
+
+
+fun arr2 (ar: ^ int[10]): int = ar^[1]
+
+############################# RECORDI
+#typ r ={i : int, arr : int[10], rr: r}   # to ne gre : mnde zarad size?
+typ r ={i : int, arr : int[10]} 
+fun rec (i : ^r): int = i^.arr[6]
+
+
+############################# DEL, NEW
+var n: int
+fun delnew (i : ^r): int = {
+	del ^n;
+	new 4;
+	4;
+}
+
+
+
+############################## EX1, EX2, Ex3
+
+fun atomExpr(): int = {
+	none;
+	nil;
+	true;
+	false;
+	'a';		# to more bit 97
+	'A';		# to more bit 65
+	10;
+
+
+}
+############################## EX4, EX6
+var pointer1 : ^int
+fun pfxExp(): int = {
+	! true;
+	+45;
+	
+	pointer1^;
+#	^"string";
+	-10;
+}
+
+############################## EX 5 : BinExpr
+
+fun binExpr(): int = {
+	1+2;
+	-3 - 4;
+	66 % 6;
+	1 <2;
+	2 > 3;
+	1 <= 4;
+	1 >= 5;
+	true & false;
+	false | false;
+	1 == 2;
+	1 != 2;
+	2 * 7*3;
+	4/2;	
+
+}
+
+############################ EX 7 in EX8 : new del 
+fun newdel(): int = {
+	new 1;
+	del pointer1 ;
+	1;
+}
+
+########################## ex 9 : name expr
+var n1 : int
+fun name(): int = {
+	n1;
+	n2 + n1 where {var n2 : int};  
+}
+fun name2(): int = {
+	n1;
+	n2 + n1 where {var n2 : int};
+	name3() where {var n2 : int fun name3() : int = n2};  
+}
+
+########################## EX10 : array expression
+fun array22(): int =    arr[0] 		# PRIMER Z ARRAY 1
+fun aray222(): int =   arr[10]	# PRIMER Z ARRAY 2: mora biti 1 add, 1 mul
+fun arr222 (ar: ^ int[10]): int = ar^[1]
+
+########################### EX11: record expr
+var record1 : {i: int, j: int}
+fun recordFuni() : int = record1.i
+fun recordFunj() : int = record1.j
+
+########################## EX 12: CAll Expr
+fun f2C(i: int) : void = {a= i;}
+fun f3(): void = f2C(3)  # ker je tu funkcija iz sitega nuvoja -> more bit MEM(TEMP)
+
+
+fun f4(): int = f5() where {fun f5(): int = 4}  # klicemo podfunkcijo -> (TEMP)
+
+fun fpod5(): int = 5
+fun f42(): int = f5() where {fun f5(): int = fpod5()}  # klicemo funkcijo 2 nivoja gor -> MEM(MEM(TEMP)) ko klicemo fpod5
+
+
+###################### EX 13: stmt expr
+
+fun stmts(i:int) : integer = {
+	1+1;
+	2+1;
+}
+
+####################### EX 15 :  Cast Expr
+
+fun castExpr(i:int) : integer = {
+	(300 : char);
+	('a' : int);
+}
+
+#### ST 1: estmt
+
+
+fun eStmt(i: int, j :int): int = {
+	i+j;
+}
+
+fun eStmt2(i: int, j :int): int = {
+	i+j;
+	2;
+}
+
+
+
+################ ST 2: assign stmt
+fun assignStmt(i: int, j :int):void = {
+	i = 2;
+	j = 3;
+}
+
+############### ST3, ST4 if stmt
+
+
+fun ifThenElse(i: int, j :int): void = {
+	if i>j then i else j;
+}
+
+fun ifThenElse2(i: int, j :int): void = {
+	if 2>0 then 2 else 0;
+}
+
+############ ST5, ST6: While STmt
+
+fun whileStmt(i: int, j :int): void = {
+	while i > 0 do i=i-1;
+}
+fun whileStmt2(i: int, j :int): void = {
+	while 1 > 0 do 11;
+}

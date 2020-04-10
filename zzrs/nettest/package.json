@@ -1,0 +1,15 @@
+{
+  "name": "nettest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "recv.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "log-timestamp": "^0.3.0",
+    "request": "^2.88.2"
+  }
+}

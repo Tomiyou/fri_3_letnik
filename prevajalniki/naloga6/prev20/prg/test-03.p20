@@ -1,0 +1,9 @@
+fun f1(i1:integer):integer = i1+f1(i1)+f2(i2)
+    where {
+    	  var i2:integer
+	  fun f2(i2:integer):integer = i1+i2+f1(i1)+f2(i2)+f3(i2)
+	  where {
+	  	var i3:integer
+		fun f3(i3:integer):integer = i1+i2+i3+f1(i1)+f2(i2)+f3(i3)
+	  }
+    }

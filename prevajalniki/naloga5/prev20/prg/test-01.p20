@@ -1,0 +1,3 @@
+typ int=integer
+var i:int
+fun inc(i:int):integer=i+1

@@ -1,0 +1,69 @@
+parser grammar PrevParser;
+
+@header {
+
+	package prev.phase.synan;
+	
+	import java.util.*;
+	
+	import prev.common.report.*;
+	import prev.phase.lexan.*;
+
+}
+
+options{
+    tokenVocab=PrevLexer;
+}
+
+
+source : prg ;
+
+prg : (decl)+ ;
+decl : KEYWORD_TYP IDENTIFIER SYMBOL_EQUALS type
+		 | KEYWORD_VAR IDENTIFIER SYMBOL_COLON type
+		 | KEYWORD_FUN IDENTIFIER SYMBOL_LBR (IDENTIFIER SYMBOL_COLON type (SYMBOL_COMMA IDENTIFIER SYMBOL_COLON type)*)? SYMBOL_RBR SYMBOL_COLON type SYMBOL_EQUALS expr ;
+
+
+
+type : KEYWORD_VOID typex
+		 | KEYWORD_CHAR typex
+		 | KEYWORD_INT typex
+		 | KEYWORD_BOOL typex
+		 | IDENTIFIER typex
+		 | SYMBOL_PWR type typex
+		 | SYMBOL_LCBR IDENTIFIER SYMBOL_COLON type (SYMBOL_COMMA IDENTIFIER SYMBOL_COLON type)* SYMBOL_RCBR typex
+		 | SYMBOL_LBR type SYMBOL_RBR typex ;
+typex : SYMBOL_LSBR expr SYMBOL_RSBR typex | ;
+
+relOps : SYMBOL_EQ | SYMBOL_NEQ | SYMBOL_LT | SYMBOL_GT | SYMBOL_LEQ | SYMBOL_GEQ ;
+addOps : SYMBOL_PLUS | SYMBOL_MIN ;
+mulOps : SYMBOL_STAR | SYMBOL_SLASH | SYMBOL_MOD ;
+prefOps : SYMBOL_EXCL | SYMBOL_PLUS | SYMBOL_MIN | SYMBOL_PWR ;
+postOps : SYMBOL_LSBR expr SYMBOL_RSBR | SYMBOL_PWR | SYMBOL_DOT IDENTIFIER ;
+constants : VOID | BOOLEAN | INTEGER | CHAR | STRING | POINTER ;
+
+expr : constants
+		 | expr postOps
+		 | prefOps expr
+		 | expr mulOps expr
+		 | expr addOps expr
+		 | expr relOps expr
+		 | expr SYMBOL_AND expr
+		 | expr SYMBOL_OR expr
+		 | expr KEYWORD_WHERE SYMBOL_LCBR prg SYMBOL_RCBR
+		 | IDENTIFIER funCall
+		 | KEYWORD_NEW expr
+		 | KEYWORD_DEL expr
+		 | SYMBOL_LCBR stmt SYMBOL_SEMIC compRepeat SYMBOL_RCBR
+		 | SYMBOL_LBR expr castE SYMBOL_RBR ;
+
+funCall : SYMBOL_LBR funCallArg SYMBOL_RBR | ;
+funCallArg : expr funCallArgExtra | ;
+funCallArgExtra : SYMBOL_COMMA expr funCallArgExtra | ;
+compRepeat : stmt SYMBOL_SEMIC compRepeat | ;
+castE : SYMBOL_COLON type | ;
+
+stmt : expr stmtx
+		 | KEYWORD_IF expr KEYWORD_THEN stmt KEYWORD_ELSE stmt
+		 | KEYWORD_WHILE expr KEYWORD_DO stmt ;
+stmtx : | SYMBOL_EQUALS expr ;

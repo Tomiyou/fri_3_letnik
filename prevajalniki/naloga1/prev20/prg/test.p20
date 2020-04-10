@@ -1,0 +1,16 @@
+0
+123 == 123 # to je komentar
+'c'
+'!'
+0123
+
+boolean _a_ = true
+
+integer _stevilo1 = +12378
+if (_a_ == false)
+then {like = true}
+else {like = false}
+
+char ch = 'k'
+
+	'mn'	

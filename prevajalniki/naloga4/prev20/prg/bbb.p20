@@ -1,0 +1,3 @@
+typ int=integer
+fun f(i:int):int=i+f(i)+g(i)
+fun g(j:int):int=j+f(j)+f(j)

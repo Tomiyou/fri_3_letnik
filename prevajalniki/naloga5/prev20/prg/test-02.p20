@@ -1,0 +1,4 @@
+typ ints=int[10]
+typ int=integer
+fun count(a:^ints):int=a^[10]+a^[20]+a^[30]
+

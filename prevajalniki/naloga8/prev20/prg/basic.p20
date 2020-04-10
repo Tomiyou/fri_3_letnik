@@ -1,0 +1,69 @@
+#typ tretjiTip = ^drugiTip
+#typ drugiTip = prviTip
+#typ prviTip = void
+
+typ mojStruct1 = { field1 : char, field2 : integer, field3 : boolean, mojVoid: ^char }
+typ mojStruct2 = { ff1 : char, ff2 : integer, ff3 : boolean, mojPtr: mojStruct1 }
+#typ mojArray = integer[10]
+#typ lelele = tretjiTip[10][5 * 12][7]
+
+var test : integer
+var topkek : integer[19]
+
+fun main(): char = {
+  if (5 > 10) then {
+    a = 'c';
+  } else {
+    a = 'g';
+  };
+  a;
+} where {
+  var a : char
+  var omojbog : integer
+}
+
+#fun main(): char = {
+#  xx = ^topkek[5];
+#  xx^ = 23;
+#  hh.mojPtr.field2 = kkkkkk(7, ^topkek[5]) + kkkkkk(10, ^topkek[5]);
+#  hh.mojPtr.field2 = hh.mojPtr.field2 * 20 + 3;
+#  (hh.mojPtr.field2:char);
+#} where {
+#  var yy : integer
+#  var xx : ^integer
+#
+#  var hh : mojStruct2
+#}
+
+#fun main(): integer = {
+#  xx = ^topkek[5];
+#  xx^ = 10;
+#  topkek[5];
+#} where {
+#  var yy : integer
+#  var xx : ^integer
+#}
+
+#fun kkkkkk(cc: integer, ll: ^integer): integer = {
+#  bb.ff1 = 12 % cc;
+#  bb.ff1 = bb.ff1 + ll^;
+#  bb.ff1 - 2;
+#} where {
+#  typ mojStruct2 = { ff1 : integer, ff2 : boolean, ff3 : boolean, mojPtr: ^void }
+#  var bb : mojStruct2
+#}
+
+
+
+
+
+
+
+
+
+
+
+
+
+# note bois:
+# - a lohk uporablaš pointer na nekej predn sploh inicializiraš ta nekej

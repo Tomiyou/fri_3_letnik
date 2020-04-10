@@ -1,0 +1,39 @@
+Tehnološka:
+- Ukinejo API od borz | nizka, resne | projekt === zmanjševanje
+- 
+
+Organizacijsko:
+- Slabo dodelimo delo raznim osebam, zato razvoj nekega dela projekta upočasnjuje ostale dele | zmerna, sprejemljive | projekt === izogibanje
+- Načini razvoja si niso jasni med razvijalci | nizka, sprejemljive | projekt
+
+Ljudje:
+- Zboli tisti, ki ima ključno vlogo pri neki pomembni aktivnosti, od katere so odvisne ostale | visoka, katastrofalne | projekt === krizni načrt
+- Noben noče testirati posameznih delov aplikacije | visoka, zmerne | izdelek === izogibanje
+
+Zahteve:
+- Cilji projekta se izkažejo za preveč ambiciozne | zmerna, katastrofalne | izdelek === zmanjševanje
+- Stranke??
+
+Ocenjevanje:
+- Potreben čas razvoja je podcenjen | visoka, katastrofalne | izdelek === izogibanje
+- Precenitev obstoječega znanja razvijalcev | nizka, resne | izdelek === izogibanje
+
+Orodja:
+- izbrana vrsta baze se ne prilega podatkom, ki naj bi jih hranila | nizka, nepomembne | projekt === izogibanje
+- Izbran framework za frontend je preveč kompleksen in neroden | nizka, resne | izdelek === izogibanje
+
+
+Funkcionalne zahteve:
+
+---- Registracija v sistem ----
+Trgovalec z delnicami, trgovalec z boti, skrbnik aplikacije se lahko registrira v aplikacijo.
+
+1. Trgovalec z delnicami klikne na Registracija
+2. Trgovalec z delnicami vpiše želeno ime, elektronsko pošto in geslo.
+3. -||- klikne potrdi.
+4. Odpre link za potrditev računa v pošti, ki jo je dobil.
+
+Izjemni tok:
+1. Uporabnik z izbranim uporabniški imenom že obstaja.
+2. Gesli se ne ujemata.
+3. Uporabnik z isto elektronsko pošto že obstaja.

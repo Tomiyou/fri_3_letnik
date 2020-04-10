@@ -1,0 +1,135 @@
+Running simulated annealing! --------------------------------------------------
+File: problems/Problem5.txt
+Seed: 1579463559491
+Indeks: 0
+Stevilo tovornjakov = 63
+Cost: 1.3802589409804301E7
+Tovornjak: 1, 81, 1
+Tovornjak: 1, 55, 1
+Tovornjak: 1, 48, 1
+Tovornjak: 1, 1, 6, 82, 1
+Tovornjak: 1, 76, 41, 1, 1
+Tovornjak: 1, 81, 1
+Tovornjak: 1, 58, 1
+Tovornjak: 1, 28, 1
+Tovornjak: 1, 73, 79, 92, 77, 66, 1
+Tovornjak: 1, 39, 1, 1
+Tovornjak: 1, 46, 64, 79, 1
+Tovornjak: 1, 58, 1, 1
+Tovornjak: 1, 6, 1, 97, 98, 34, 1
+Tovornjak: 1, 8, 1
+Tovornjak: 1, 92, 1, 93, 46, 65, 1
+Tovornjak: 1, 55, 1
+Tovornjak: 1, 15, 1
+Tovornjak: 1, 47, 1
+Tovornjak: 1, 46, 1, 58, 1
+Tovornjak: 1, 55, 1
+Tovornjak: 1, 2, 1
+Tovornjak: 1, 47, 1
+Tovornjak: 1, 55, 1
+Tovornjak: 1, 1, 12, 1
+Tovornjak: 1, 11, 1
+Tovornjak: 1, 4, 78, 1
+Tovornjak: 1, 24, 1
+Tovornjak: 1, 28, 1
+Tovornjak: 1, 55, 1
+Tovornjak: 1, 54, 25, 1
+Tovornjak: 1, 8, 80, 67, 1
+Tovornjak: 1, 32, 46, 1
+Tovornjak: 1, 67, 49, 1, 1
+Tovornjak: 1, 1, 92, 31, 1
+Tovornjak: 1, 2, 60, 1
+Tovornjak: 1, 49, 1
+Tovornjak: 1, 70, 1
+Tovornjak: 1, 76, 1, 6, 60, 1
+Tovornjak: 1, 26, 1
+Tovornjak: 1, 47, 57, 1
+Tovornjak: 1, 10, 1
+Tovornjak: 1, 1, 54, 73, 76, 86, 1
+Tovornjak: 1, 39, 1
+Tovornjak: 1, 31, 15, 1, 1
+Tovornjak: 1, 11, 1
+Tovornjak: 1, 74, 1
+Tovornjak: 1, 54, 98, 77, 1
+Tovornjak: 1, 26, 1
+Tovornjak: 1, 74, 1
+Tovornjak: 1, 1, 65, 62, 18, 87, 1
+Tovornjak: 1, 58, 1
+Tovornjak: 1, 8, 1
+Tovornjak: 1, 76, 43, 1, 16, 1
+Tovornjak: 1, 54, 1
+Tovornjak: 1, 69, 88, 1
+Tovornjak: 1, 1, 1, 49, 1
+Tovornjak: 1, 70, 1
+Tovornjak: 1, 31, 1
+Tovornjak: 1, 55, 1, 55, 1
+Tovornjak: 1, 81, 1
+Tovornjak: 1, 31, 1, 1
+Tovornjak: 1, 2, 79, 1, 67, 1
+Tovornjak: 1, 49, 4, 1
+-------------------------
+Cost: 3756.29734679
+Tovornjak: 1, 8, 1
+Tovornjak: 1, 67, 30, 55, 65, 1
+Tovornjak: 1, 2, 17, 16, 1
+Tovornjak: 1, 67, 85, 9, 15, 1
+Tovornjak: 1, 12, 1
+Tovornjak: 1, 31, 15, 1
+Tovornjak: 1, 65, 71, 37, 31, 1
+Tovornjak: 1, 28, 77, 16, 1
+Tovornjak: 1, 49, 67, 80, 83, 50, 65, 1
+Tovornjak: 1, 58, 1
+Tovornjak: 1, 8, 93, 64, 73, 1
+Tovornjak: 1, 92, 45, 92, 1
+Tovornjak: 1, 24, 52, 13, 19, 34, 61, 2, 1
+Tovornjak: 1, 46, 1
+Tovornjak: 1, 47, 25, 51, 21, 92, 1
+Tovornjak: 1, 2, 66, 75, 13, 2, 1
+Tovornjak: 1, 8, 51, 11, 1
+Tovornjak: 1, 58, 35, 64, 89, 4, 16, 1
+Tovornjak: 1, 46, 27, 30, 55, 1
+Tovornjak: 1, 8, 40, 8, 1
+Tovornjak: 1, 2, 88, 72, 49, 1
+Tovornjak: 1, 2, 6, 82, 31, 1
+Tovornjak: 1, 39, 1
+Tovornjak: 1, 55, 1
+Tovornjak: 1, 70, 1
+Tovornjak: 1, 65, 7, 65, 1
+Tovornjak: 1, 81, 1
+Tovornjak: 1, 58, 90, 58, 1
+Tovornjak: 1, 32, 83, 81, 1
+Tovornjak: 1, 54, 60, 41, 55, 1
+Tovornjak: 1, 16, 18, 57, 4, 16, 1
+Tovornjak: 1, 2, 13, 2, 1
+Tovornjak: 1, 55, 43, 55, 22, 31, 1
+Tovornjak: 1, 12, 26, 12, 1
+Tovornjak: 1, 46, 68, 46, 1
+Tovornjak: 1, 73, 63, 79, 86, 52, 2, 1
+Tovornjak: 1, 65, 97, 48, 60, 41, 55, 1
+Tovornjak: 1, 46, 69, 94, 68, 33, 65, 1
+Tovornjak: 1, 58, 1
+Tovornjak: 1, 65, 50, 65, 1
+Tovornjak: 1, 55, 53, 55, 1
+Tovornjak: 1, 58, 96, 58, 1
+Tovornjak: 1, 67, 29, 67, 1
+Tovornjak: 1, 15, 84, 10, 1
+Tovornjak: 1, 10, 1
+Tovornjak: 1, 65, 3, 65, 1
+Tovornjak: 1, 55, 41, 55, 1
+Tovornjak: 1, 55, 95, 55, 1
+Tovornjak: 1, 55, 94, 23, 97, 65, 1
+Tovornjak: 1, 58, 1, 65, 50, 87, 27, 76, 2, 1
+Tovornjak: 1, 39, 99, 39, 1
+Tovornjak: 1, 74, 1
+Tovornjak: 1, 10, 5, 10, 1
+Tovornjak: 1, 65, 14, 65, 1
+Tovornjak: 1, 31, 91, 31, 1
+Tovornjak: 1, 2, 100, 44, 2, 1
+Tovornjak: 1, 12, 59, 12, 1
+Tovornjak: 1, 2, 61, 36, 78, 62, 8, 1
+Tovornjak: 1, 65, 97, 98, 38, 42, 41, 55, 1
+Tovornjak: 1, 81, 83, 56, 39, 1
+Tovornjak: 1, 11, 1
+Tovornjak: 1, 31, 20, 31, 1
+Tovornjak: 1, 65, 14, 38, 14, 65, 1
+-------------------------

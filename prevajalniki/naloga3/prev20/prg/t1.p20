@@ -1,0 +1,91 @@
+typ prviTip =void
+typ Tip2 = char
+typ prviTip3 =boolean
+typ prviTip4 = krneki
+	typ prviTip5 =( void ) typ prviTip6 = ^ void
+  typ tip7 = { neki : void }
+  typ tip8 = { neki2 : void, neki3 : integer, neki4 : {neki5 : char} }
+  typ tip10 = integer
+  
+  # dodaj se teste za: 3. pravilo ki ima expression
+  
+  
+var id1 : integer
+var id2 : _krnekiIdentifier
+var id4   :   ^ char
+var id5 : {id1 : integer, id2: _krnekiIdentifier}
+var id6 : ( {id1 : integer, id2: _krnekiIdentifier} )
+
+var id3 : void [123]
+var id32 : void [ 123]
+var id33 : void [123 ]
+var id34 : void [ "string" ]
+
+# expr brez vseh kjer pomemben vrstni red.
+var id : void [identi ]
+var id : void [identi ()]
+var id : void [ identi ("NEK expression")]
+var id : boolean [new new new 123]
+var id : integer [ new del "string"]
+var id : neki [( "katerikoli Expression" )]
+var id : void [{if 'a' then 0 else 0;}]
+var id : neki [( ((123)) )]
+var id : void [{if 'a' then 0 else 0; if 'a' then 0 else 0; }]
+var id : neki [( 123 : boolean )]
+var id : neki [ (123 : ^ char)]
+
+# le z where 
+var id : neki [ 123 where { var id3 : void [123] }]
+var id : neki [ 123 where {  var id3 : void [123] } where { var id3 : void [123] }]
+
+
+#  dodamo OR
+var id : neki [ (123 | "charl")]
+var id : neki [ (1 | 2| 3)]
+var id : neki [1 | 2 where { var id3 : void [123] } ]
+
+# dodamo AND
+var id : neki [ 123 & 13 ]
+var id : neki [ 123 & 13 & 165]
+var id : neki [ 123 & 13 | 165]
+var id : neki [ 123 | 13 & 165]
+
+# dodamo RELATIONAL
+var id : neki [ 10 != 13 ]
+var id : neki [ 123 & 34 > 13 ]
+var id : neki [ 4 | 123 & 123 != 13 ]
+var id : neki [ 123 != 4  &  13 | 123]
+var id : neki [ 123 != 4  !=  123]
+var id : neki [ 123 & 13 & 165]
+
+# dodamo se +, -, *, /, %
+
+var id : integer [ 2 + 3 + 4]
+var id : integer [ 2 + 3 & 4]
+
+var id : inetegr [ 2 * 3 * 4]
+
+var id35 : integer [2 * 2 + 2]
+var id35 : integer [2 + 2 * 2]
+
+var id : integer  [2 % 4]
+var id : integer [4/2]
+var id : integer  [2 % 4]
+
+# prefix
+var id_36 : char [^ 2 + ! 2 * -2 + +2]
+var id_36 : char [^ 2 | 2]
+
+# postfix
+var id : char [ 2+3[2+0] ]
+var id : char [2+3[2+5[0]]]
+var id_36 : char [^ 2 ^]
+var id : char [2+3*5 . nekIdentifier]
+
+
+
+var id : integer [4/2+2^]
+
+
+
+

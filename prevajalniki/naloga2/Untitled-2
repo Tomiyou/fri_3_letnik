@@ -1,0 +1,73 @@
+Prg -> Decl DeclRepeat .
+DeclRepeat -> Decl DeclRepeat .
+DeclRepeat -> .
+Decl -> typ identifier = Type .
+Decl -> var identifier : Type .
+Decl -> fun identifier ( FunD ) : Type = Expr .
+FunD -> identifier : Type TypeRepeat .
+FunD -> .
+
+
+
+Type -> void Type' .
+Type -> char Type' .
+Type -> integer Type' .
+Type -> boolean Type' .
+Type -> identifier Type' .
+Type -> ^ Type Type' .
+Type -> { identifier : Type TypeRepeat } Type' .
+Type -> ( Type ) Type' .
+Type' -> [ Expr ] Type' .
+Type' -> .
+TypeRepeat -> , identifier : Type TypeRepeat .
+TypeRepeat -> .
+
+
+
+Expr -> const .
+Expr -> identifier .
+Expr -> identifier ( FunE1 ) .
+FunE1 -> Expr FunE2 .
+FunE1 -> .
+FunE2 -> , Expr FunE2 .
+FunE2 -> .
+Expr -> new Expr .
+Expr -> del Expr .
+Expr -> { Stmt ; CompRepeat } .
+CompRepeat -> Stmt ; CompRepeat .
+CompRepeat -> .
+Expr -> ( Expr : Type ) .
+Expr -> ( Expr ) .
+
+Expr -> Expr InfixE Expr .
+InfixE -> & .
+InfixE -> or .
+InfixE -> == .
+InfixE -> != .
+InfixE -> < .
+InfixE -> > .
+InfixE -> <= .
+InfixE -> >= .
+InfixE -> * .
+InfixE -> / .
+InfixE -> % .
+InfixE -> + .
+InfixE -> - .
+Expr -> PrefixE Expr .
+PrefixE -> ! .
+PrefixE -> + .
+PrefixE -> - .
+PrefixE -> ^ .
+Expr -> Expr PostfixE .
+PostfixE -> [ Expr ] .
+PostfixE -> ^ .
+PostfixE -> pika identifier .
+Expr -> Expr where { Prg } .
+
+
+
+Stmt -> Expr Stmt' .
+Stmt' -> .
+Stmt' -> = Expr .
+Stmt -> if Expr then Stmt else Stmt .
+Stmt -> while Expr do Stmt .

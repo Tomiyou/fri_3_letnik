@@ -1,0 +1,99 @@
+ 
+#GAME OF LIFE by Jure Viteznik
+
+var sizeX: integer
+var sizeY: integer
+
+#cant use sizeX and sizeY since they have no value...
+typ gameboard = boolean[10][10]
+var board: gameboard
+
+fun main(): integer = {
+    sizeX = 10;
+    sizeY = 10;
+    
+    #set all board elements to false
+    x = 0;
+    while(x < sizeX)do{
+        y = 0;
+        while(y < sizeY)do{
+            board[x][y] = false;
+            y = y+1;
+        };
+        x = x+1;
+    };
+
+    #set some elements to true
+    board[3][3] = true;
+    board[3][4] = true;
+    board[3][5] = true;
+
+
+    #let the game of life begin:D
+    while true do{
+        x = 1;
+        while(x < sizeX - 1)do{
+            y = 1;
+            while(y < sizeY - 1)do{
+                numOfAlive = aliveNeighbours(x,y);
+                
+                #if alive
+                if board[x][y] then{
+                    if(numOfAlive < 2 | numOfAlive > 3) then
+                        newBoard[x][y] = false
+                    else 
+                        newBoard[x][y] = true;
+                    
+                #if dead
+                }else{
+                    if(numOfAlive == 3) then
+                        newBoard[x][y] = true
+                    else 
+                        newBoard[x][y] = false;
+                };
+            }where{
+                var numOfAlive: integer
+            };
+            x = x+1;
+        };
+
+        #board = newBoard;
+
+        #########################
+        #here comes print(board)#
+        #########################
+
+
+    }where{
+        var newBoard: gameboard
+    };
+}where{
+    var x: integer
+    var y: integer
+}
+
+#returns a number of live neighbours
+fun aliveNeighbours(x:integer, y:integer): integer = {
+    numOfNeigh = 0;
+    
+    xiter = x-1;
+    yiter = y-1;
+    while(xiter <= x+1)do{
+        while(yiter <= y+1)do{
+            if board[xiter][yiter] then 
+                numOfNeigh = numOfNeigh+1
+            else 1; #tuki more bit stmt..... aaaaaaaaaa zakaj
+            yiter = yiter+1;
+        };
+        xiter = xiter+1;
+    };
+
+    #how do we return a value???? last expr in a function? idk...
+    numOfNeigh;
+}where{
+    var xiter: integer
+    var yiter: integer
+    var numOfNeigh: integer
+}
+
+#ps: also do you know how much I hate if statements in this language.... omg wtf, they are unusable

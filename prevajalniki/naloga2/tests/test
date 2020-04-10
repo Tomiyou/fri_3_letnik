@@ -1,0 +1,2 @@
+rm *.html
+make PHASE=synan "$1"

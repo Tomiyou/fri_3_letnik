@@ -4,21 +4,30 @@ import java.io.File;
 
 public class LocalSearch {
   public static void main(String[] args) {
-    // new SimulatedAnnealing("problems/Problem1.txt");
-    // new SimulatedAnnealing("problems/Problem2.txt");
-    // new SimulatedAnnealing("problems/Problem3.txt");
-    // new SimulatedAnnealing("problems/Problem4.txt");
-    new SimulatedAnnealing("problems/Problem5.txt");
-    // SimulatedAnnealing p6 = new SimulatedAnnealing("problems/Problem6.txt");
-    // p6.run();
-    // SimulatedAnnealing p7 = new SimulatedAnnealing("problems/Problem7.txt");
-    // p7.run();
-    // SimulatedAnnealing p8 = new SimulatedAnnealing("problems/Problem8.txt");
-    // p8.run();
-    // SimulatedAnnealing p9 = new SimulatedAnnealing("problems/Problem9.txt");
-    // p9.run();
-    // SimulatedAnnealing p10 = new SimulatedAnnealing("problems/Problem10.txt");
-    // p10.run();
+    // new SimulatedAnnealing("problems/Problem1.txt", 0);
+    // new SimulatedAnnealing("problems/Problem1.txt", 1);
+    // new SimulatedAnnealing("problems/Problem1.txt", 2);
+    // new SimulatedAnnealing("problems/Problem2.txt", 0);
+    // new SimulatedAnnealing("problems/Problem2.txt", 1);
+    // new SimulatedAnnealing("problems/Problem2.txt", 2);
+    // new SimulatedAnnealing("problems/Problem3.txt", 0);
+    // new SimulatedAnnealing("problems/Problem3.txt", 1);
+    // new SimulatedAnnealing("problems/Problem3.txt", 2);
+    // new SimulatedAnnealing("problems/Problem4.txt", 0);
+    // new SimulatedAnnealing("problems/Problem4.txt", 1);
+    // new SimulatedAnnealing("problems/Problem4.txt", 2);
+    // new SimulatedAnnealing("problems/Problem5.txt", 0);
+    // new SimulatedAnnealing("problems/Problem5.txt", 1);
+    // new SimulatedAnnealing("problems/Problem5.txt", 2);
+    new SimulatedAnnealing("problems/Problem6.txt", 0);
+    new SimulatedAnnealing("problems/Problem6.txt", 1);
+    new SimulatedAnnealing("problems/Problem6.txt", 2);
+    // new SimulatedAnnealing("problems/Problem7.txt", 0);
+    // new SimulatedAnnealing("problems/Problem7.txt", 1);
+    // new SimulatedAnnealing("problems/Problem7.txt", 2);
+    // new SimulatedAnnealing("problems/Problem8.txt");
+    // new SimulatedAnnealing("problems/Problem9.txt");
+    // new SimulatedAnnealing("problems/Problem10.txt");
   }
 }
 
@@ -28,8 +37,8 @@ class SimulatedAnnealing {
 
   public double T = 1;
   final double Tmin = .0001;
-  final double alpha = 0.975;
-  final int numIterations = 8000;
+  final double alpha = 0.985;
+  final int numIterations = 5000;
 
   Vozlisce[] vozlisca;
   int stVozlisc;
@@ -37,23 +46,28 @@ class SimulatedAnnealing {
   double[] vsiOdpadki;
   // int nismoPobraliVsega;
 
-  static final double nbr_doNothing = 0.4;
-  static final double nbr_remove = 0.15;
-  static final double nbr_add = 0.15;
-  static final double nbr_change = 0.3;
+  static final double nbr_doNothing = 0.95; // 0.975
+  static final double nbr_remove = 0.7 / 5;
+  static final double nbr_add = 1.3 / 5;
+  static final double nbr_change = 3.0 / 5;
+  static final double useNeighbors = 0.75;
+  static final double tovornjakiMult = 1.25;
 
-  public SimulatedAnnealing(String problemFile) {
+  public SimulatedAnnealing(String problemFile, int oidx) {
     System.out.println("Running simulated annealing! --------------------------------------------------");
     System.out.println("File: " + problemFile);
     this.problemFile = problemFile;
     // this.nismoPobraliVsega = 0;
 
-    this.run();
+    this.run(oidx);
   }
 
-  public void run() {
-    // rand = new Random(1);
-    rand = new Random(System.currentTimeMillis());
+  public void run(int odpadkiIndeks) {
+    // long seed = 1579464096182L;
+    long seed = System.currentTimeMillis();
+    System.out.println("Seed: " + seed);
+    System.out.println("Indeks: " + odpadkiIndeks);
+    rand = new Random(seed);
     Scanner sc;
 
     try {
@@ -95,12 +109,14 @@ class SimulatedAnnealing {
 
     sc.close();
 
-    Solution bestOrgansko = simulatedAnnealing(0);
-    // Solution bestPlastika = simulatedAnnealing(1);
-    // Solution bestPapir = simulatedAnnealing(2);
+    Solution bestOrgansko = simulatedAnnealing(odpadkiIndeks);
+
+    // popravi prepovedane povezave
+    bestOrgansko = fixNiPovezave(bestOrgansko, odpadkiIndeks);
+    bestOrgansko.cena = cost(bestOrgansko.poti, odpadkiIndeks);
 
     bestOrgansko.print();
-    costVerbose(bestOrgansko.poti, 0);
+    costVerbose(bestOrgansko.poti, odpadkiIndeks);
   }
 
   public Solution simulatedAnnealing(int odpadkiIndeks) {
@@ -129,6 +145,11 @@ class SimulatedAnnealing {
           currentSol = newSol;
       }
 
+      if (rand.nextDouble() < 0.05) {
+        currentSol = fixNiPovezave(currentSol, odpadkiIndeks);
+        currentSol.cena = cost(currentSol.poti, odpadkiIndeks);
+      }
+
       T *= alpha; // Decreases T, cooling phase
     }
 
@@ -148,30 +169,49 @@ class SimulatedAnnealing {
     int stTovornjakov = currentSol.poti.size();
     ArrayList<ArrayList<Integer>> poti = new ArrayList<>(stTovornjakov);
 
+    boolean skippedFirst = false;
     for (ArrayList<Integer> pot : currentSol.poti) {
-      double p = rand.nextDouble();
+      if (!skippedFirst) {
+        skippedFirst = true;
+        poti.add(pot);
+        continue;
+      }
 
-      if (p < nbr_doNothing) {
+      if (!skippedFirst || rand.nextDouble() < nbr_doNothing) {
         // ne naredi nicesar
         poti.add(pot);
         continue;
       }
 
       ArrayList<Integer> novaPot = new ArrayList<>(pot);
-      if (p < nbr_doNothing + nbr_add) {
-        // pred izbrano vozlisce vstavi novo
-        novaPot.add(rand.nextInt(novaPot.size() + 1), rand.nextInt(stVozlisc));
-        // System.out.println("Vstavi: " + index + ", " + f);
-      } else if (p < nbr_doNothing + nbr_add + nbr_remove) {
-        if (novaPot.size() > 1) {
-          // odstrani izbrano vozlisce iz poti
-          novaPot.remove(rand.nextInt(novaPot.size()));
-          // System.out.println("Odstrani: " + index);
+
+      while (true) {
+        double p = rand.nextDouble();
+        if (p < nbr_add) {
+          // pred izbrano vozlisce vstavi novo
+          int v = rand.nextInt(novaPot.size() + 1);
+          if (rand.nextDouble() < useNeighbors) {
+            Vozlisce prejsnjeVozlisce = (v > 0) ? vozlisca[novaPot.get(v - 1)] : vozlisca[0];
+            novaPot.add(v, prejsnjeVozlisce.vrniRandomSoseda());
+          } else
+            novaPot.add(v, rand.nextInt(stVozlisc));
+        } else if (p < nbr_add + nbr_remove) {
+          if (novaPot.size() > 1) {
+            // odstrani izbrano vozlisce iz poti
+            novaPot.remove(rand.nextInt(novaPot.size()));
+          }
+        } else {
+          // spremeni izbrano vozlisce
+          int v = rand.nextInt(novaPot.size());
+          if (rand.nextDouble() < useNeighbors) {
+            Vozlisce prejsnjeVozlisce = (v > 0) ? vozlisca[novaPot.get(v - 1)] : vozlisca[0];
+            novaPot.set(v, prejsnjeVozlisce.vrniRandomSoseda());
+          } else
+            novaPot.set(v, rand.nextInt(stVozlisc));
         }
-      } else {
-        // spremeni izbrano vozlisce
-        novaPot.set(rand.nextInt(novaPot.size()), rand.nextInt(stVozlisc));
-        // System.out.println("Spremeni: " + index + ", " + f);
+
+        if (rand.nextDouble() < nbr_doNothing)
+          break;
       }
 
       poti.add(novaPot);
@@ -185,12 +225,13 @@ class SimulatedAnnealing {
   }
 
   public Solution genRandSol(int odpadkiIndeks) {
-    int stTovornjakov = (int) Math.ceil(vsiOdpadki[odpadkiIndeks] / kapacitetaTovornjaka);
+    int stTovornjakov = (int) Math.round(tovornjakiMult * Math.ceil(vsiOdpadki[odpadkiIndeks] / kapacitetaTovornjaka));
     System.out.println("Stevilo tovornjakov = " + stTovornjakov);
     ArrayList<ArrayList<Integer>> poti = new ArrayList<>(stTovornjakov);
 
-    for (int i = 0; i < stTovornjakov; i++)
+    for (int i = 0; i < stTovornjakov; i++) {
       poti.add(genRandPot(odpadkiIndeks));
+    }
 
     return new Solution(cost(poti, odpadkiIndeks), poti);
   }
@@ -201,8 +242,13 @@ class SimulatedAnnealing {
     double prostor = kapacitetaTovornjaka;
 
     // random solution
+    Vozlisce prejsnjeVozlisce = vozlisca[0];
     while (true) {
-      Vozlisce novoVozlisce = vozlisca[rand.nextInt(stVozlisc)];
+      Vozlisce novoVozlisce = vozlisca[prejsnjeVozlisce.vrniRandomSoseda()];
+      while (prejsnjeVozlisce.vrniRazdaljoSoseda(novoVozlisce.id, kapacitetaTovornjaka - prostor).pretezka) {
+        novoVozlisce = vozlisca[prejsnjeVozlisce.vrniRandomSoseda()];
+      }
+      
       if ((prostor - novoVozlisce.odpadki[odpadkiIndeks]) < 0) {
         // premalo prostora za novo vozlisce
         break;
@@ -211,6 +257,7 @@ class SimulatedAnnealing {
       prostor -= novoVozlisce.odpadki[odpadkiIndeks];
       novoVozlisce.odpadki[odpadkiIndeks] = 0;
       pot.add(novoVozlisce.id);
+      prejsnjeVozlisce = novoVozlisce;
     }
 
     for (int i = 0; i < stVozlisc; i++)
@@ -219,66 +266,68 @@ class SimulatedAnnealing {
     return pot;
   }
 
-  public double costVerbose(ArrayList<ArrayList<Integer>> poti, int odpadkiIndeks) {
-    double totalCost = 0;
+  public ArrayList<Integer> costVerbose(ArrayList<ArrayList<Integer>> poti, int odpadkiIndeks) {
+    // Omejitve:
+    // - more pobrat smeti ko gre preko vozlisca, ce ima dovolj prostora OK
+    // - ko pobere, pobere vse naenkrat OK
+    // - konca na zacetku OK
+    // Cena:
+    // - 10 takoj OK
+    // - 0.1 na vsak kilometer (50 km/h) OK
+    // - 10 na uro za delavca, 20 po 8 urah OK
+    // - 12 min za pobrat, 30 min na konc za odložit OK
 
+    double totalCost = 0;
+    int idxTovornjaka = 0;
+    ArrayList<Integer> toPrune = new ArrayList<>();
+    
     for (ArrayList<Integer> potTovornjaka : poti) {
-      System.out.println("==================================");
-      int prejsnjeVozlisce = 0;
+      Vozlisce prejsnjeVozlisce = vozlisca[0];
       double mul = 1, cost = 10, razdalja = 0, nosilnost = 0, trajanje = 30; // trajanje v min
       potTovornjaka.add(0);
 
       for (int i = 0; i < potTovornjaka.size(); i++) {
         Vozlisce trenutnoVozlisce = vozlisca[potTovornjaka.get(i)];
 
-        if (trenutnoVozlisce.id == prejsnjeVozlisce) {
+        if (trenutnoVozlisce.id == prejsnjeVozlisce.id) {
           cost += 300;
-          System.out.println("Enako prejsnjemu");
+          // System.out.println("Enako prejsnjemu");
         }
 
         // pridobimo razdaljo med vozliscema, ce ne obstaja, je rzd = -1
-        Pair cesta = trenutnoVozlisce.vrniRazdaljoSoseda(prejsnjeVozlisce, nosilnost);
+        Pair cesta = prejsnjeVozlisce.vrniRazdaljoSoseda(trenutnoVozlisce.id, nosilnost);
         if (cesta.razdalja < 0) {
           // povezava med trenutnim in prejsnjim vozliscem ne obstaja
-          cost += 250;
+          cost += 500;
           mul += 2;
-          System.out.printf("Povezava ne obstaja %d --> %d\n", prejsnjeVozlisce, trenutnoVozlisce.id);
+          System.out.printf("Povezava ne obstaja %d --> %d\n", prejsnjeVozlisce.id, trenutnoVozlisce.id);
         } else if (cesta.pretezka) {
           // povezava obstaja, a ne moremo pobrati vsega (boljse)
           cost += 120;
           mul += 1;
-          System.out.printf("Tovornjak pretezek %d --> %d\n", prejsnjeVozlisce, trenutnoVozlisce.id);
+          System.out.printf("Tovornjak pretezek %d --> %d\n", prejsnjeVozlisce.id, trenutnoVozlisce.id);
         } else if (cesta.razdalja != 0) {
           razdalja += cesta.razdalja;
           // trajanje += x km / 50km/h * 60 min, trajanje je v minutah
           trajanje += (cesta.razdalja / 50) * 60;
-          // System.out.printf("%d --> %d razdalja %f, trajanje %f\n", prejsnjeVozlisce,
-          // trenutnoVozlisce.id, razdalja,
-          // trajanje);
         }
 
         // preverimo, a je kaj za pobrat, in ce lahko poberemo vse naenkrat
         if (trenutnoVozlisce.odpadki[odpadkiIndeks] > 0
             && (kapacitetaTovornjaka - nosilnost) >= trenutnoVozlisce.odpadki[odpadkiIndeks]) {
           // lahko poberemo vse naenkrat
-          // System.out.printf("Ne moremo pobrati vsega %d\n", trenutnoVozlisce.id);
           trajanje += 12;
           nosilnost += trenutnoVozlisce.odpadki[odpadkiIndeks];
           trenutnoVozlisce.odpadki[odpadkiIndeks] = 0;
-          // System.out.printf("%d --> %d razdalja %f, nosilnost %f\n", prejsnjeVozlisce,
-          // trenutnoVozlisce.id, razdalja,
-          // nosilnost);
         }
 
-        prejsnjeVozlisce = trenutnoVozlisce.id;
-        // System.out.println("Vmesna cena: " + cost);
+        prejsnjeVozlisce = trenutnoVozlisce;
       }
 
       potTovornjaka.remove(potTovornjaka.size() - 1);
 
       // pristejemo ceno vozenja
       cost += razdalja * 0.1;
-      // System.out.println("Cena z razdaljo: " + cost);
 
       // pristejemo ceno delavca
       int ure = (int) Math.ceil(trajanje / 60);
@@ -286,23 +335,27 @@ class SimulatedAnnealing {
       // vse po 8 urah se steje dvojno
       ure -= 8;
       if (ure > 0) {
-        System.out.println("Placamo delavce dvojno");
         cost += ure * 10;
+        // System.out.println("Placamo delavce dvojno: " + ure);
       }
 
-      // System.out.println("Cena z delavci: " + cost);
-
       // preverimo a je koncal na zacetku
-      if (prejsnjeVozlisce != 0) {
-        System.out.println("Ni koncal na zacetku");
+      if (prejsnjeVozlisce.id != 0) {
         cost += 200;
         mul += 1;
+        System.out.println("Ni koncal na zacetku");
       }
 
       // pomnozimo ceno z multiplierjem in pristejemo k celotni
       totalCost += cost * mul;
       // System.out.println("Celotna cena do sedaj: " + totalCost + ", multiplier: " +
       // mul);
+      if (nosilnost < 1) {
+        // System.out.println("Prune: " + idxTovornjaka);
+        toPrune.add(idxTovornjaka);
+      }
+      idxTovornjaka++;
+
     }
 
     // pristejemo vse odpadke, k jih nismo pobrali k celotni ceni
@@ -313,11 +366,12 @@ class SimulatedAnnealing {
     }
 
     if (preostaliOdpadki > 0) {
-      totalCost += preostaliOdpadki * 30;
-      System.out.println("NISMO POBRALI VSEGA!");
+      // nismo pobrali vsega
+      totalCost += preostaliOdpadki * 100;
+      System.out.println("NISMO POBRALI VSEGA! " + preostaliOdpadki);
     }
 
-    return totalCost;
+    return toPrune;
   }
 
   public double cost(ArrayList<ArrayList<Integer>> poti, int odpadkiIndeks) {
@@ -334,27 +388,27 @@ class SimulatedAnnealing {
     double totalCost = 0;
 
     for (ArrayList<Integer> potTovornjaka : poti) {
-      int prejsnjeVozlisce = 0;
+      Vozlisce prejsnjeVozlisce = vozlisca[0];
       double mul = 1, cost = 10, razdalja = 0, nosilnost = 0, trajanje = 30; // trajanje v min
       potTovornjaka.add(0);
 
       for (int i = 0; i < potTovornjaka.size(); i++) {
         Vozlisce trenutnoVozlisce = vozlisca[potTovornjaka.get(i)];
 
-        if (trenutnoVozlisce.id == prejsnjeVozlisce) {
+        if (trenutnoVozlisce.id == prejsnjeVozlisce.id) {
           cost += 300;
         }
 
         // pridobimo razdaljo med vozliscema, ce ne obstaja, je rzd = -1
-        Pair cesta = trenutnoVozlisce.vrniRazdaljoSoseda(prejsnjeVozlisce, nosilnost);
+        Pair cesta = prejsnjeVozlisce.vrniRazdaljoSoseda(trenutnoVozlisce.id, nosilnost);
         if (cesta.razdalja < 0) {
           // povezava med trenutnim in prejsnjim vozliscem ne obstaja
-          cost += 500;
+          cost += 2500;
           mul += 2;
         } else if (cesta.pretezka) {
           // povezava obstaja, a ne moremo pobrati vsega (boljse)
-          cost += 120;
-          mul += 1;
+          cost += 1200;
+          mul += 2;
         } else if (cesta.razdalja != 0) {
           razdalja += cesta.razdalja;
           // trajanje += x km / 50km/h * 60 min, trajanje je v minutah
@@ -370,7 +424,7 @@ class SimulatedAnnealing {
           trenutnoVozlisce.odpadki[odpadkiIndeks] = 0;
         }
 
-        prejsnjeVozlisce = trenutnoVozlisce.id;
+        prejsnjeVozlisce = trenutnoVozlisce;
       }
 
       potTovornjaka.remove(potTovornjaka.size() - 1);
@@ -388,7 +442,7 @@ class SimulatedAnnealing {
       }
 
       // preverimo a je koncal na zacetku
-      if (prejsnjeVozlisce != 0) {
+      if (prejsnjeVozlisce.id != 0) {
         cost += 200;
         mul += 1;
       }
@@ -406,10 +460,138 @@ class SimulatedAnnealing {
 
     if (preostaliOdpadki > 0) {
       // nismo pobrali vsega
-      totalCost += preostaliOdpadki * 100;
+      totalCost += preostaliOdpadki * 5000;
     }
 
     return totalCost;
+  }
+
+  public Solution fixNiPovezave(Solution sol, int odpadkiIndeks) {
+    // System.out.println("FIXING POVEZAVE ---------------------------------\n");
+    
+    for (ArrayList<Integer> pot : sol.poti) {
+      Vozlisce prejsnjeVozlisce = vozlisca[0];
+      double nosilnost = 0;
+      pot.add(0);
+
+      // gremo cez celo pot
+      for (int i = 0; i < pot.size(); i++) {
+        Vozlisce trenutnoVozlisce = vozlisca[pot.get(i)];
+
+        // ali bomo kaj pobral
+        if (trenutnoVozlisce.odpadki[odpadkiIndeks] > 0
+            && (kapacitetaTovornjaka - nosilnost) >= trenutnoVozlisce.odpadki[odpadkiIndeks]) {
+          // lahko poberemo vse naenkrat
+          nosilnost += trenutnoVozlisce.odpadki[odpadkiIndeks];
+          trenutnoVozlisce.odpadki[odpadkiIndeks] = 0;
+        }
+
+        Pair cesta = prejsnjeVozlisce.vrniRazdaljoSoseda(trenutnoVozlisce.id, nosilnost);
+        if (cesta.razdalja < 0 || cesta.pretezka) {
+          // ni povezave, popravljamo
+          // System.out.println(prejsnjeVozlisce.id + " --> " + trenutnoVozlisce.id + " ne obstaja!");
+          // gremo cez vse sosede prejsnjega vozlisca
+          ArrayList<Integer> povezava = najdiPovezavo(trenutnoVozlisce.id, prejsnjeVozlisce, nosilnost, odpadkiIndeks);
+          if (povezava != null) {
+            for (int novV : povezava) {
+              pot.add(i, novV);
+            }
+          } else {
+
+            // System.out.println("FUCK: " + prejsnjeVozlisce.id + " '' " + trenutnoVozlisce.id);
+            // pot.add(i, pot.get(i - 2));
+          }
+        }
+
+        prejsnjeVozlisce = trenutnoVozlisce;
+      }
+
+      pot.remove(pot.size() - 1);
+    }
+
+    for (Vozlisce v : vozlisca) {
+      v.resetOdpadke();
+    }
+
+    return sol;
+  }
+
+  ArrayList<Integer> najdiPovezavo(int konec, Vozlisce zacetek, double nosilnost, int odpadkiIndeks) {
+    // System.out.println(zacetek.id + " : " + konec);
+    int[] obiskanaVozlisca = new int[stVozlisc];
+    for (int i = 0; i < stVozlisc; i++)
+      obiskanaVozlisca[i] = -1;
+    
+    Queue<Vozlisce> q = new LinkedList<>();
+    q.add(zacetek);
+    obiskanaVozlisca[zacetek.id] = zacetek.id;
+
+    while (!q.isEmpty()) {
+      Vozlisce trenutnoVozlisce = q.remove();
+      // System.out.println("Dobil: " + trenutnoVozlisce.id);
+      
+      Pair cesta = trenutnoVozlisce.vrniRazdaljoSoseda(konec, nosilnost);
+      if (cesta.razdalja >= 0 && !cesta.pretezka) {
+        ArrayList<Integer> a = new ArrayList<Integer>();
+        int jaz = trenutnoVozlisce.id;
+        while (jaz != zacetek.id) {
+          a.add(jaz);
+          // System.out.println("LOL " + jaz);
+          jaz = obiskanaVozlisca[jaz];
+        }
+
+        return a;
+      }
+
+      for (Integer _sosed : trenutnoVozlisce.sosedi.sosedi.keySet()) {
+        Vozlisce sosed = vozlisca[_sosed];
+        if (obiskanaVozlisca[_sosed] >= 0 || sosed.odpadki[odpadkiIndeks] != 0) continue;
+        Pair x = trenutnoVozlisce.vrniRazdaljoSoseda(sosed.id, nosilnost);
+        if (x.pretezka) {
+          // System.out.println("Damn: " + sosed.id + " : " + x.razdalja);
+          continue;
+        }
+        obiskanaVozlisca[_sosed] = trenutnoVozlisce.id;
+        q.add(sosed);
+        // System.out.println("Dodal soseda: " + _sosed);
+      }
+    }
+
+    return null;
+  }
+
+  void pruneTovornjake(Solution sol, int odpadkiIndeks) {
+    ArrayList<Integer> toDelete = new ArrayList<>();
+    int i = 0;
+    for (ArrayList<Integer> pot : sol.poti) {
+      double nosilnost = 0;
+
+      for (Integer v : pot) {
+        Vozlisce trenutnoVozlisce = vozlisca[v];
+        // preverimo, a je kaj za pobrat, in ce lahko poberemo vse naenkrat
+        if (trenutnoVozlisce.odpadki[odpadkiIndeks] > 0
+            && (kapacitetaTovornjaka - nosilnost) >= trenutnoVozlisce.odpadki[odpadkiIndeks]) {
+          // lahko poberemo vse naenkrat
+          nosilnost += trenutnoVozlisce.odpadki[odpadkiIndeks];
+          trenutnoVozlisce.odpadki[odpadkiIndeks] = 0;
+        }
+      }
+
+      if (nosilnost == 0) {
+        toDelete.add(i);
+      }
+
+      i++;
+    }
+
+    for (int del : toDelete) {
+      System.out.println("Pruning: " + del);
+      sol.poti.remove(del);
+    }
+
+    for (Vozlisce v : vozlisca) {
+      v.resetOdpadke();
+    }
   }
 
   // Class solution, bundling configuration with error
@@ -480,6 +662,18 @@ class SimulatedAnnealing {
         this._sosedi[i] = sosed;
         i++;
       }
+    }
+
+    public int vrniRandomSoseda() {
+      return this._sosedi[rand.nextInt(stSosedov)];
+    }
+  }
+
+  class SortByStSosedov implements Comparator<Vozlisce> {
+    // Used for sorting in ascending order of
+    // roll number
+    public int compare(Vozlisce a, Vozlisce b) {
+      return a.stSosedov - b.stSosedov;
     }
   }
 

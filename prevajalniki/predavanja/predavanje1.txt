@@ -1,0 +1,108 @@
+SYNTAX ANALYSIS
+input: a sequence of symbols (token, lexeme, position)
+output: a derivation tree
+
+CFG G <N,T,P,S> V=NuT
+        |-> contains language symbols ie. tokens
+
+example: arithmetic expressions +-*/() INT ID
+1st grammar: S -> + | - | * | / | ( | ) | INT | ID | +S | -S | *S | /S | (S | )S | INT S | ID S
+2nd grammar: S -> INT | ID | S + S | S - S | S * S | S / S | (S)
+    problem with ordering (float summing, multiplication order is important)
+    ambigous grammar (multiple evaluation trees for a single expression)
+3rd grammar: S -> E
+             E -> E + T | E - T | T
+             T -> T * F | T / F | F
+             F -> INT | ID | (E)
+          S
+          |
+          E
+         /|\
+        / | \
+       E  +  T
+      /|\    |
+     / | \   F
+    E  +  T  |
+    |     |  ID
+    T     F  |
+    |     |  c
+    F    ID
+    |     |
+    ID    b
+    |
+    a
+  
+  !! it is unambigous
+
+
+
+A grammar G and a string w. Can we prove w e L(G)
+Algorithms:
+  - CYK (n^3) dont use, cause you don't want to transform the grammar into Chomsky normal form
+  - LL parsing
+  - LR parsing
+
+
+
+LL parsing:
+  1. Left-to-right scan of the input string
+  2. Producing the leftmost derivation
+i.e., construct the derivation tree in a top-down manner
+
+sententional form -> k : X1X2...Xn = | X1X2...Xk   k <= n
+                                     | X1X2...Xn   k >= n
+FIRSTGk(alpha) = {k: w | exists(w) e T* : alpha =>*G w}
+FOLLOWGk(alpha) = {w | exists(beta1, beta2) e (NuT)* : S =>*G beta1.alpha.beta2 and w e FIRSTGk(beta2)}
+
+alpha = X1X2...Xn e V*
+alpha =>*G w
+
+!poglej sliko
+
+elements of N : A,B,C,... and S
+elements of T : a,b,c,...
+elements of NuT : X,Y,Z,...
+elements of (NuT)* : alpha, beta, gamma, ...   sententional form
+elements of T* : x,y,z,y,v,w,...               strings, words
+
+
+
+                           S
+                          / \
+                         .   .
+                        .     .
+                       .       .
+                      .         .
+                     .           .
+                    .             .
+                   /               \
+                  [        w        ] == input source file
+                  |---|
+                    k
+
+S -> alpha1 | alpha2 | ... | alphan
+(Opažanja?):
+1. exists(alphai): k: w e FIRSTGk(alphai) => there might exist S =>*G w (because S=>G alphai =>*G w)
+2. if there exists exactly one sch alphai = X1X2...Xn then take it and hope for the best
+
+                S
+               / \
+              /   \
+             /     \
+            /       \
+           X1 X2 ... Xn
+          .           .
+         .             .
+        .               .
+       .                 .
+      .                   .
+     [          w          ]
+     |-> k
+     |---> k
+     |-----> k
+
+Xi -> alpha1 | alpha2 | ... | alpham
+1. exists(alphai) : k:w e FIRSTGk(alphai FOLLOWGk(Xi)) => there might exist X1X2...Xn =>G alphai X2...Xn
+2. if there is exactly one such alphai then use it and hope for the best
+
+(if you see a, use this production, if you see b, use this production)

@@ -1,0 +1,9 @@
+\babel@toc {nil}{}
+\contentsline {chapter}{Predgovor}{iii}% 
+\contentsline {chapter}{\numberline {1}Benchmark orodja}{1}% 
+\contentsline {section}{\numberline {1.1}Opis problema}{1}% 
+\contentsline {section}{\numberline {1.2}Benchmark orodja}{1}% 
+\contentsline {section}{\numberline {1.3}Brezpla\IeC {\v c}na orodja}{1}% 
+\contentsline {section}{\numberline {1.4}Pla\IeC {\v c}ljiva orodja}{1}% 
+\contentsline {section}{\numberline {1.5}Tehni\IeC {\v c}na navodila za pisanje teksta}{2}% 
+\contentsline {section}{\numberline {1.6}Zaklju\IeC {\v c}ek}{3}% 

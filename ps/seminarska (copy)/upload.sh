@@ -1,0 +1,1 @@
+scp "./$1" "devcloud:/home/u35446/$2"

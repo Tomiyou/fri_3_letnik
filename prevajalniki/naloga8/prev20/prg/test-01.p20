@@ -1,0 +1,7 @@
+var i:integer
+fun main(i:integer,j:integer):integer=i+j+k1+a[0]+k2
+    where {
+       	  var k1:integer
+	  var a:integer[10]
+	  var k2:integer
+    }
