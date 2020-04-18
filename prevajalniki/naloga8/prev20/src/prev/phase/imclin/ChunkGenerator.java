@@ -59,11 +59,41 @@ public class ChunkGenerator extends AstFullVisitor<Object, Object> {
 	}
 	
 	private Vector<ImcStmt> linearize(Vector<ImcStmt> stmts) {
-		for (ImcStmt stmt : stmts) {
-			System.out.println("X: " + stmt);
+		HashMap<MemLabel, Integer> labels = new HashMap<>();
+
+		for (int i = 1; i < stmts.size(); i++) {
+			if (stmts.get(i) instanceof ImcLABEL) {
+				ImcLABEL label = (ImcLABEL) stmts.get(i);
+
+				// preverimo ali ima vsak label spredaj jump
+				if (!(stmts.get(i - 1) instanceof ImcJUMP || stmts.get(i - 1) instanceof ImcCJUMP)) {
+					stmts.add(i, new ImcJUMP(label.label));
+					i++;
+				}
+				
+				labels.put(label.label, i);
+			}
 		}
 
-		return stmts;
+		@SuppressWarnings("unchecked")
+		Vector<ImcStmt> __stmts = (Vector<ImcStmt>) stmts.clone();
+		for (int i = 0; i < __stmts.size(); i++) {
+			ImcStmt stmt = __stmts.get(i);
+			
+			if (stmt instanceof ImcCJUMP) {
+				// skopiraj negativno labelo za ta CJUMP brez LABELE
+				i++; // skip ImcCJUMP
+				int k = labels.get(((ImcCJUMP) stmt).negLabel) + 1; // +1 da skippamo labelo
+				
+				while (k < stmts.size() && !(stmts.get(k) instanceof ImcLABEL)) {
+					__stmts.add(i++, stmts.get(k++));
+				}
+				
+				i -= 1;
+			}
+		}
+
+		return __stmts;
 	}
 
 }

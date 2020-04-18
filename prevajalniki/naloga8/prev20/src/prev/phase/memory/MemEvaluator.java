@@ -49,7 +49,7 @@ public class MemEvaluator extends AstFullVisitor<Object, MemEvaluator.Context> {
 
 		long size = SemAn.isType.get(compDecl.type()).actualType().size();
 		RecContext _ctx = (RecContext) ctx;
-		MemAccess acc = new MemRelAccess(size, -_ctx.compsSize, 0);
+		MemAccess acc = new MemRelAccess(size, _ctx.compsSize, 0);
 		_ctx.compsSize += size;
 
 		return Memory.accesses.put(compDecl, acc);
@@ -97,8 +97,8 @@ public class MemEvaluator extends AstFullVisitor<Object, MemEvaluator.Context> {
 			acc = new MemAbsAccess(size, new MemLabel(varDecl.name()));
 		} else {
 			FunContext _ctx = (FunContext) ctx;
-			acc = new MemRelAccess(size, -8 - _ctx.locsSize, _ctx.depth);
 			_ctx.locsSize += size;
+			acc = new MemRelAccess(size, -_ctx.locsSize, _ctx.depth);
 		}
 
 		return Memory.accesses.put(varDecl, acc);
