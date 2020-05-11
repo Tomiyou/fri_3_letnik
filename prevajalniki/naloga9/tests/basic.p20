@@ -1,0 +1,21 @@
+fun main(): integer = {
+  xx(3, 8) + 7;
+} where {
+  var n: integer
+  fun xx(l:integer, v:integer): integer = {
+    n + 10;
+  }
+}
+
+#fun main(): integer = {
+#  n=getInteger();
+#  n=queens(0,n,^qs);
+#  putString("# ALL SOLUTIONS = ");
+#  putInteger(n);
+#  putChar((10:char));
+#  putChar((10:char));
+#  0;
+#} where {
+#  var n:integer
+#  var qs:[32]integer
+#}

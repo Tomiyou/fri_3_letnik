@@ -1,0 +1,34 @@
+\BOOKMARK [0][-]{chapter*.2}{Predgovor}{}% 1
+\BOOKMARK [0][-]{chapter.1}{Benchmark orodja}{}% 2
+\BOOKMARK [1][-]{section.1.1}{Opis problema}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.2}{Benchmark orodja}{chapter.1}% 4
+\BOOKMARK [1][-]{section.1.3}{Brezplacna orodja}{chapter.1}% 5
+\BOOKMARK [2][-]{subsection.1.3.1}{Rocno benchmark testiranje}{section.1.3}% 6
+\BOOKMARK [2][-]{subsection.1.3.2}{PerfKit Benchmarker}{section.1.3}% 7
+\BOOKMARK [1][-]{section.1.4}{Placljiva orodja}{chapter.1}% 8
+\BOOKMARK [2][-]{subsection.1.4.1}{SPEC Cloud\256 IaaS 2018}{section.1.4}% 9
+\BOOKMARK [2][-]{subsection.1.4.2}{Cloud Spectator}{section.1.4}% 10
+\BOOKMARK [2][-]{subsection.1.4.3}{Cloud Performance Benchmark}{section.1.4}% 11
+\BOOKMARK [2][-]{subsection.1.4.4}{Technology Business Research, Inc.}{section.1.4}% 12
+\BOOKMARK [1][-]{section.1.5}{Implementacija merilnega okolja}{chapter.1}% 13
+\BOOKMARK [2][-]{subsection.1.5.1}{Tehnicne specifikacije racunalnika}{section.1.5}% 14
+\BOOKMARK [1][-]{section.1.6}{Rezultati meritev}{chapter.1}% 15
+\BOOKMARK [2][-]{subsection.1.6.1}{Geekbench 3}{section.1.6}% 16
+\BOOKMARK [2][-]{subsection.1.6.2}{iPerf}{section.1.6}% 17
+\BOOKMARK [2][-]{subsection.1.6.3}{ioPing}{section.1.6}% 18
+\BOOKMARK [2][-]{subsection.1.6.4}{Fio}{section.1.6}% 19
+\BOOKMARK [2][-]{subsection.1.6.5}{Lastnosti metrik testov}{section.1.6}% 20
+\BOOKMARK [1][-]{section.1.7}{Zmogljivost omre\236nih povezav}{chapter.1}% 21
+\BOOKMARK [2][-]{subsection.1.7.1}{RTT}{section.1.7}% 22
+\BOOKMARK [2][-]{subsection.1.7.2}{Ping}{section.1.7}% 23
+\BOOKMARK [2][-]{subsection.1.7.3}{TraceRoute}{section.1.7}% 24
+\BOOKMARK [2][-]{subsection.1.7.4}{Implementacija}{section.1.7}% 25
+\BOOKMARK [2][-]{subsection.1.7.5}{Umetno breme}{section.1.7}% 26
+\BOOKMARK [1][-]{section.1.8}{Zmogljivost diskovnega sistema}{chapter.1}% 27
+\BOOKMARK [1][-]{section.1.9}{Zmogljivost procesorja}{chapter.1}% 28
+\BOOKMARK [2][-]{subsection.1.9.1}{Opis programa}{section.1.9}% 29
+\BOOKMARK [2][-]{subsection.1.9.2}{Algoritem za faktorizacijo}{section.1.9}% 30
+\BOOKMARK [2][-]{subsection.1.9.3}{Algoritem za iskanje pra\235tevil}{section.1.9}% 31
+\BOOKMARK [2][-]{subsection.1.9.4}{Rezultati meritev}{section.1.9}% 32
+\BOOKMARK [1][-]{section.1.10}{Zakljucek}{chapter.1}% 33
+\BOOKMARK [1][-]{section.1.11}{Viri}{chapter.1}% 34

@@ -1,0 +1,33 @@
+\babel@toc {nil}{}
+\contentsline {chapter}{Predgovor}{iii}% 
+\contentsline {chapter}{\numberline {1}Benchmark orodja}{1}% 
+\contentsline {section}{\numberline {1.1}Opis problema}{1}% 
+\contentsline {section}{\numberline {1.2}Benchmark orodja}{2}% 
+\contentsline {section}{\numberline {1.3}Brezpla\IeC {\v c}na orodja}{2}% 
+\contentsline {subsection}{\numberline {1.3.1}Ro\IeC {\v c}no benchmark testiranje}{2}% 
+\contentsline {subsection}{\numberline {1.3.2}PerfKit Benchmarker}{3}% 
+\contentsline {section}{\numberline {1.4}Pla\IeC {\v c}ljiva orodja}{3}% 
+\contentsline {subsection}{\numberline {1.4.1}SPEC Cloud\IeC {\textregistered } IaaS 2018}{3}% 
+\contentsline {subsection}{\numberline {1.4.2}Cloud Spectator}{4}% 
+\contentsline {subsection}{\numberline {1.4.3}Cloud Performance Benchmark}{4}% 
+\contentsline {subsection}{\numberline {1.4.4}Technology Business Research, Inc.}{4}% 
+\contentsline {section}{\numberline {1.5}Implementacija merilnega okolja}{5}% 
+\contentsline {subsection}{\numberline {1.5.1}Tehni\IeC {\v c}ne specifikacije ra\IeC {\v c}unalnika}{5}% 
+\contentsline {section}{\numberline {1.6}Rezultati meritev}{5}% 
+\contentsline {subsection}{\numberline {1.6.1}Geekbench 3}{6}% 
+\contentsline {subsection}{\numberline {1.6.2}iPerf}{7}% 
+\contentsline {subsection}{\numberline {1.6.3}ioPing}{8}% 
+\contentsline {subsection}{\numberline {1.6.4}Fio}{9}% 
+\contentsline {subsection}{\numberline {1.6.5}Lastnosti metrik testov}{9}% 
+\contentsline {section}{\numberline {1.7}Zmogljivost omre\IeC {\v z}nih povezav}{10}% 
+\contentsline {subsection}{\numberline {1.7.1}RTT}{10}% 
+\contentsline {subsection}{\numberline {1.7.2}Ping}{10}% 
+\contentsline {subsection}{\numberline {1.7.3}TraceRoute}{10}% 
+\contentsline {subsection}{\numberline {1.7.4}Implementacija}{10}% 
+\contentsline {subsection}{\numberline {1.7.5}Umetno breme}{11}% 
+\contentsline {section}{\numberline {1.8}Zmogljivost diskovnega sistema}{13}% 
+\contentsline {section}{\numberline {1.9}Zmogljivost procesorja}{14}% 
+\contentsline {subsection}{\numberline {1.9.1}Opis programa}{14}% 
+\contentsline {subsection}{\numberline {1.9.2}Rezultati meritev}{14}% 
+\contentsline {section}{\numberline {1.10}Zaklju\IeC {\v c}ek}{16}% 
+\contentsline {section}{\numberline {1.11}Viri}{16}% 

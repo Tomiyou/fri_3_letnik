@@ -1,0 +1,35 @@
+\babel@toc {nil}{}
+\contentsline {chapter}{Predgovor}{iii}{chapter*.2}% 
+\contentsline {chapter}{\numberline {1}Benchmark orodja in platforma Azure}{1}{chapter.1}% 
+\contentsline {section}{\numberline {1.1}Opis problema}{1}{section.1.1}% 
+\contentsline {section}{\numberline {1.2}Benchmark orodja}{2}{section.1.2}% 
+\contentsline {section}{\numberline {1.3}Brezpla\IeC {\v c}na orodja}{2}{section.1.3}% 
+\contentsline {subsection}{\numberline {1.3.1}Ro\IeC {\v c}no benchmark testiranje}{2}{subsection.1.3.1}% 
+\contentsline {subsection}{\numberline {1.3.2}PerfKit Benchmarker}{3}{subsection.1.3.2}% 
+\contentsline {section}{\numberline {1.4}Pla\IeC {\v c}ljiva orodja}{3}{section.1.4}% 
+\contentsline {subsection}{\numberline {1.4.1}SPEC Cloud\IeC {\textregistered } IaaS 2018}{3}{subsection.1.4.1}% 
+\contentsline {subsection}{\numberline {1.4.2}Cloud Spectator}{4}{subsection.1.4.2}% 
+\contentsline {subsection}{\numberline {1.4.3}Cloud Performance Benchmark}{4}{subsection.1.4.3}% 
+\contentsline {subsection}{\numberline {1.4.4}Technology Business Research, Inc.}{4}{subsection.1.4.4}% 
+\contentsline {section}{\numberline {1.5}Implementacija merilnega okolja}{5}{section.1.5}% 
+\contentsline {subsection}{\numberline {1.5.1}Tehni\IeC {\v c}ne specifikacije ra\IeC {\v c}unalnika}{5}{subsection.1.5.1}% 
+\contentsline {section}{\numberline {1.6}Rezultati meritev}{5}{section.1.6}% 
+\contentsline {subsection}{\numberline {1.6.1}Geekbench 3}{6}{subsection.1.6.1}% 
+\contentsline {subsection}{\numberline {1.6.2}iPerf}{7}{subsection.1.6.2}% 
+\contentsline {subsection}{\numberline {1.6.3}ioPing}{8}{subsection.1.6.3}% 
+\contentsline {subsection}{\numberline {1.6.4}Fio}{9}{subsection.1.6.4}% 
+\contentsline {subsection}{\numberline {1.6.5}Lastnosti metrik testov}{9}{subsection.1.6.5}% 
+\contentsline {section}{\numberline {1.7}Zmogljivost omre\IeC {\v z}nih povezav}{10}{section.1.7}% 
+\contentsline {subsection}{\numberline {1.7.1}RTT}{10}{subsection.1.7.1}% 
+\contentsline {subsection}{\numberline {1.7.2}Ping}{10}{subsection.1.7.2}% 
+\contentsline {subsection}{\numberline {1.7.3}TraceRoute}{10}{subsection.1.7.3}% 
+\contentsline {subsection}{\numberline {1.7.4}Implementacija}{10}{subsection.1.7.4}% 
+\contentsline {subsection}{\numberline {1.7.5}Umetno breme}{11}{subsection.1.7.5}% 
+\contentsline {section}{\numberline {1.8}Zmogljivost diskovnega sistema}{13}{section.1.8}% 
+\contentsline {section}{\numberline {1.9}Zmogljivost procesorja}{14}{section.1.9}% 
+\contentsline {subsection}{\numberline {1.9.1}Opis programa}{14}{subsection.1.9.1}% 
+\contentsline {subsection}{\numberline {1.9.2}Algoritem za faktorizacijo}{14}{subsection.1.9.2}% 
+\contentsline {subsection}{\numberline {1.9.3}Algoritem za iskanje pra\IeC {\v s}tevil}{15}{subsection.1.9.3}% 
+\contentsline {subsection}{\numberline {1.9.4}Rezultati meritev}{16}{subsection.1.9.4}% 
+\contentsline {subsection}{\numberline {1.9.5}Test ob spremenjenih podatkovnih strukturah}{17}{subsection.1.9.5}% 
+\contentsline {section}{\numberline {1.10}Zaklju\IeC {\v c}ek}{19}{section.1.10}% 

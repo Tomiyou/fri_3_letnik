@@ -1,0 +1,15 @@
+fun main(): integer = {
+  yy = 15;
+  lel();
+  yy;
+} where {
+  var yy : integer
+  fun lel(): integer = {
+    ccc(7) + 17;
+  } where {
+    fun ccc(i: integer): integer = {
+      yy = 13;
+      yy + i - 3;
+    }
+  }
+}

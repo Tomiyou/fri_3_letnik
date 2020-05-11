@@ -1,0 +1,8 @@
+fun main():void = {
+   tab[1][2] = 1;
+    b = tab[1][2];
+    b = 1;
+} where {
+	var tab : [10][10] integer
+    var b : integer
+}
