@@ -1,0 +1,6 @@
+\babel@toc {nil}{}
+\contentsline {chapter}{Predgovor}{iii}%
+\contentsline {chapter}{\numberline {1}Testiranje SQL baze z Digital Ocean spletnim servisom (A. Jarc, M. Ko\v cevar, V. Omahen, M. Mencin)}{1}%
+\contentsline {section}{\numberline {1.1}Opis problema}{1}%
+\contentsline {section}{\numberline {1.2}Tehni\v cna navodila za pisanje teksta}{1}%
+\contentsline {section}{\numberline {1.3}Zaklju"cek}{3}%

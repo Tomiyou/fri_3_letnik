@@ -40,7 +40,7 @@ public class LiveAn extends Phase {
 
 					HashSet<MemTemp> oldIn = instr.in();
 					HashSet<MemTemp> oldOut = instr.out();
-					
+
 					HashSet<MemTemp> in = new HashSet<MemTemp>(instr.uses());
 					HashSet<MemTemp> out = instr.out();
 
@@ -61,7 +61,8 @@ public class LiveAn extends Phase {
 							}
 						}
 
-						// ce uses != null, potem je to conditional jump, naslednik je tudi naslednji ukaz
+						// ce uses != null, potem je to conditional jump, naslednik je tudi naslednji
+						// ukaz
 						if (instr.uses() != null && code.instrs.size() > i + 1) {
 							nexts.add(code.instrs.get(i + 1));
 						}
@@ -75,16 +76,22 @@ public class LiveAn extends Phase {
 						out.addAll(nextIn.in());
 					}
 
+					if (i == code.instrs.size() - 1) {
+						// to je zadnji ukaz, dodamo RV kot out
+						out.add(code.frame.RV);
+					}
+
 					instr.addOutTemp(out);
 
 					// zanka je true, dokler se usi nehajo spremenijat
-					if (!(in.containsAll(oldIn) && oldIn.containsAll(in) && out.containsAll(oldOut) && oldOut.containsAll(out))) {
+					if (!(in.containsAll(oldIn) && oldIn.containsAll(in) && out.containsAll(oldOut)
+							&& oldOut.containsAll(out))) {
 						zanka = true;
 					}
-					
+
 				}
 			}
-			
+
 		}
 
 	}
