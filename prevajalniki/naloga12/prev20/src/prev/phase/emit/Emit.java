@@ -184,10 +184,8 @@ public class Emit extends Phase {
 		appendLine("_del	POP");
 
 		try {
-			String filename = Compiler.cmdLineArgValue("--src-file-name");
-			if (filename.contains("."))
-				filename = filename.substring(0, filename.lastIndexOf('.'));
-			PrintWriter writer = new PrintWriter(filename + ".mms", "UTF-8");
+			String filename = Compiler.cmdLineArgValue("--dst-file-name");
+			PrintWriter writer = new PrintWriter(filename, "UTF-8");
 			writer.write(_assembly.toString());
 			writer.flush();
 			writer.close();

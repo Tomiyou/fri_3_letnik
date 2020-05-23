@@ -6,6 +6,7 @@ import prev.data.imc.code.expr.*;
 import prev.data.imc.visitor.*;
 import prev.data.asm.*;
 import prev.Compiler;
+import prev.common.report.Report;
 
 /**
  * Machine code generator for expressions.
@@ -26,10 +27,11 @@ public class ExprGenerator implements ImcVisitor<MemTemp, Vector<AsmInstr>> {
 	@Override
 	public MemTemp visit(ImcCONST constant, Vector<AsmInstr> instructions) {
 		Vector<MemTemp> defs = new Vector<>();
-
-		// rezultati zapišemo v temp začasno spremenljivko
+		// rezultat zapišemo v temp začasno spremenljivko
 		defs.add(temp);
 
+
+		// če je konstanta negativna, jo rabimo na koncu posebej negirat
 		long val = constant.value;
 		boolean negative = false;
 		if (val < 0) {
@@ -84,7 +86,6 @@ public class ExprGenerator implements ImcVisitor<MemTemp, Vector<AsmInstr>> {
 			case DIV:
 				instr = "DIV";
 				break;
-
 			case AND:
 				instr = "AND";
 				break;
@@ -98,44 +99,42 @@ public class ExprGenerator implements ImcVisitor<MemTemp, Vector<AsmInstr>> {
 				return temp;
 
 			default: {
+				// imamo primerjalni ukaz
 				// v cmpDefs zapišemo izhod CMP ukaza
 				Vector<MemTemp> cmpDefs = new Vector<>();
 				cmpDefs.add(new MemTemp());
-
 				instructions.add(new AsmOPER("CMP `d0,`s0,`s1", uses, cmpDefs, null));
 
 				switch (binOp.oper) {
 					case EQU:
-						instructions.add(new AsmOPER("ZSZ `d0,`s0,1", cmpDefs, defs, null));
+						instr = "ZSZ";
 						break;
 					case NEQ:
-						instructions.add(new AsmOPER("ZSNZ `d0,`s0,1", cmpDefs, defs, null));
+						instr = "ZSNZ";
 						break;
 
 					case LTH:
-						instructions.add(new AsmOPER("ZSN `d0,`s0,1", cmpDefs, defs, null));
+						instr = "ZSN";
 						break;
 					case GEQ:
-						instructions.add(new AsmOPER("ZSNN `d0,`s0,1", cmpDefs, defs, null));
+						instr = "ZSNN";
 						break;
 
 					case GTH:
-						instructions.add(new AsmOPER("ZSP `d0,`s0,1", cmpDefs, defs, null));
+						instr = "ZSP";
 						break;
-					case LEQ:
-						instructions.add(new AsmOPER("ZSNP `d0,`s0,1", cmpDefs, defs, null));
+					default: // LEQ
+						instr = "ZSNP";
 						break;
-
-					default:
-						System.out.println("[ExprGen]" + binOp.oper + " does not exist");
 				}
 
+				// cmpDefs je sedaj uses, defs so pa dejanski defs
+				instructions.add(new AsmOPER(instr + " `d0,`s0,1", cmpDefs, defs, null));
 				return temp;
 			}
 		}
 
 		instructions.add(new AsmOPER(instr + " `d0,`s0,`s1", uses, defs, null));
-
 		return temp;
 	}
 
@@ -144,16 +143,20 @@ public class ExprGenerator implements ImcVisitor<MemTemp, Vector<AsmInstr>> {
 		Vector<MemLabel> jumps = new Vector<>();
 		jumps.add(call.label);
 
+		// offset postaja manjši, po stacku se približujemo SP
 		int offset = call.args().size() * 8;
 
+		// damo argumente na stack za novo funkcijo
 		// Iterate backwards, SL že v args
 		ListIterator<ImcExpr> argIter = call.args().listIterator(call.args().size());
 		while (argIter.hasPrevious()) {
 			ImcExpr expr = argIter.previous();
 			offset -= 8;
 
+			// izračunamo vrednost argumenta
 			MemTemp argTemp = expr.accept(this, instructions);
 
+			// shranimo vrednost na stack
 			Vector<MemTemp> uses = new Vector<>();
 			uses.add(argTemp);
 			instructions.add(new AsmOPER("STO `s0,$254," + offset, uses, null, null));
@@ -161,7 +164,7 @@ public class ExprGenerator implements ImcVisitor<MemTemp, Vector<AsmInstr>> {
 
 		instructions.add(new AsmOPER("PUSHJ $" + Compiler.registerCount + "," + call.label.name, null, null, jumps));
 
-		// Return value
+		// naložimo RV (ki je izhod tega ImcCALL izraza)
 		Vector<MemTemp> defs = new Vector<MemTemp>();
 		defs.add(temp);
 		instructions.add(new AsmOPER("LDO `d0,$254,0", null, defs, null));
@@ -183,6 +186,8 @@ public class ExprGenerator implements ImcVisitor<MemTemp, Vector<AsmInstr>> {
 				instructions.add(new AsmOPER("NEG `d0,`s0", uses, defs, null));
 				break;
 			case NOT:
+				// true = 1 -> 1 - 1 = 0, NEG 0 = 0 = false
+				// false = 0 -> 0 - 1 = -1, NEG -1 = 1 = true
 				instructions.add(new AsmOPER("SUB `d0,`s0,1", uses, defs, null));
 				instructions.add(new AsmOPER("NEG `d0,`s0", defs, defs, null));
 				return temp;
@@ -193,10 +198,7 @@ public class ExprGenerator implements ImcVisitor<MemTemp, Vector<AsmInstr>> {
 
 	@Override
 	public MemTemp visit(ImcNAME name, Vector<AsmInstr> instructions) {
-		// Vector<MemTemp> uses = new Vector<>();
 		Vector<MemTemp> defs = new Vector<>();
-
-		// uses.add(new MemTemp());
 		defs.add(temp);
 
 		// iz pomnilnika naložimo vrednost spremenljivke (label -> LDA)

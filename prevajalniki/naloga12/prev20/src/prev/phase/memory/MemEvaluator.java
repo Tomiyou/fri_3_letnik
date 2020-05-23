@@ -110,7 +110,6 @@ public class MemEvaluator extends AstFullVisitor<Object, MemEvaluator.Context> {
 	public Object visit(AstAtomExpr atomExpr, Context ctx) {
 		if (atomExpr.type() == AstAtomExpr.Type.STRING) {
 			long size = atomExpr.value().length() * 8;
-			// long size = SemAn.ofType.get(atomExpr).actualType();
 			Memory.strings.put(atomExpr, new MemAbsAccess(size, new MemLabel(), atomExpr.value()));
 		}
 		return null;

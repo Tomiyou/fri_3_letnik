@@ -42,7 +42,7 @@ public class Compiler {
 		return cmdLine.get(cmdLineArgName);
 	}
 
-	public static Integer registerCount = 100;
+	public static Integer registerCount = 20;
 
 	// THE COMPILER'S STARTUP METHOD
 

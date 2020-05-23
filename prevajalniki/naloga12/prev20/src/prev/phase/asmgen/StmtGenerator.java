@@ -45,7 +45,6 @@ public class StmtGenerator implements ImcVisitor<Vector<AsmInstr>, Object> {
 	public Vector<AsmInstr> visit(ImcMOVE move, Object visArg) {
 		Vector<AsmInstr> instructions = new Vector<AsmInstr>();
 		Vector<MemTemp> uses = new Vector<>();
-		Vector<MemTemp> defs = new Vector<>();
 
 		if (move.dst instanceof ImcMEM) {
 			// shranimo nekaj v RAM
@@ -56,17 +55,18 @@ public class StmtGenerator implements ImcVisitor<Vector<AsmInstr>, Object> {
 			uses.add(memDst.addr.accept(new ExprGenerator(), instructions));
 			instructions.add(new AsmOPER("STO `s0,`s1,0", uses, null, null));
 		} else {
+			// samo premikamo vrednosti registrov
 			if (move.dst instanceof ImcTEMP && move.src instanceof ImcTEMP) {
 				// vrednost ene začasne spremenljivke prepišemo v drugo začasno spremenljivko
+				Vector<MemTemp> defs = new Vector<>();
 				defs.add(move.dst.accept(new ExprGenerator(), instructions));
 				uses.add(move.src.accept(new ExprGenerator(), instructions));
 				instructions.add(new AsmMOVE("SET `d0,`s0", uses, defs));
 			} else {
 				// acceptamo move destination in začasno spremenljivko, ki jo dobimo, damo kot
-				// lokacijo,
-				// kamor naj move source zapiše vrednost
+				// lokacijo, kamor naj move source zapiše vrednost
 				MemTemp temp = move.dst.accept(new ExprGenerator(), instructions);
-				uses.add(move.src.accept(new ExprGenerator(temp), instructions));
+				move.src.accept(new ExprGenerator(temp), instructions);
 			}
 		}
 

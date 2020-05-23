@@ -59,24 +59,18 @@ public class ChunkGenerator extends AstFullVisitor<Object, Object> {
 	}
 	
 	private Vector<ImcStmt> linearize(Vector<ImcStmt> stmts) {
-		HashMap<MemLabel, Integer> labels = new HashMap<>();
-
 		for (int i = 1; i < stmts.size(); i++) {
 			if (stmts.get(i) instanceof ImcLABEL) {
 				ImcLABEL label = (ImcLABEL) stmts.get(i);
 
 				// preverimo ali ima vsak label spredaj jump
-				if (!(stmts.get(i - 1) instanceof ImcJUMP || stmts.get(i - 1) instanceof ImcCJUMP)) {
-					stmts.add(i, new ImcJUMP(label.label));
-					i++;
-				}
-				
-				labels.put(label.label, i);
+				ImcStmt prevImc = stmts.get(i - 1);
+				if (!(prevImc instanceof ImcJUMP || prevImc instanceof ImcCJUMP))
+					stmts.add(i++, new ImcJUMP(label.label));
 			}
 		}
 
-		@SuppressWarnings("unchecked")
-		Vector<ImcStmt> __stmts = (Vector<ImcStmt>) stmts.clone();
+		Vector<ImcStmt> __stmts = new Vector<ImcStmt>(stmts);
 		for (int i = 0; i < __stmts.size(); i++) {
 			ImcStmt stmt = __stmts.get(i);
 			
