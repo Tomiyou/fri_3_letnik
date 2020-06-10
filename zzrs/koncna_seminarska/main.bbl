@@ -1,43 +1,37 @@
 \begin{thebibliography}{1}
 
-\bibitem{proghelpFio}
-{From My Virtual Desktop: Basic Network Testing with IPERF}.
+\bibitem{thousandEyes}
+{Cloud Performance Benchmark}.
 \newblock
-  \url{https://programmer.help/blogs/linux-io-stress-test-tool-fio.html},
-  September 2009.
-
-\bibitem{mem90Fill}
-{How to fill 90 of the free memory?}
-\newblock
-  \url{https://unix.stackexchange.com/questions/99334/how-to-fill-90-of-the-free-memory},
-  September 2009.
-
-\bibitem{skorks}
-{How To Quickly Generate A Large File On The Command Line (With Linux)}.
-\newblock
-  \url{https://skorks.com/2010/03/how-to-quickly-generate-a-large-file-on-the-command-line-with-linux/},
-  September 2009.
-
-\bibitem{TBR}
-{Technology Business Research, Inc.}
-\newblock \url{https://tbri.com/tbr-difference/}, September 2009.
+  \url{https://blog.thousandeyes.com/top-takeaways-cloud-performance-benchmark/}.
 
 \bibitem{cloudSpectator}
 {Cloud Spectator}.
 \newblock
-  \url{https://cloudspectator.com/wp-content/uploads/2019/10/2018_Top10_NA_v1.3.pdf},
-  December 2015.
+  \url{https://cloudspectator.com/wp-content/uploads/2019/10/2018_Top10_NA_v1.3.pdf}.
 
-\bibitem{thousandEyes}
-{Cloud Performance Benchmark}.
+\bibitem{proghelpFio}
+{From My Virtual Desktop: Basic Network Testing with IPERF}.
 \newblock
-  \url{https://blog.thousandeyes.com/top-takeaways-cloud-performance-benchmark/},
-  Februar 2018.
+  \url{https://programmer.help/blogs/linux-io-stress-test-tool-fio.html}.
+
+\bibitem{mem90Fill}
+{How to fill 90 of the free memory?}
+\newblock
+  \url{https://unix.stackexchange.com/questions/99334/how-to-fill-90-of-the-free-memory}.
+
+\bibitem{skorks}
+{How To Quickly Generate A Large File On The Command Line (With Linux)}.
+\newblock
+  \url{https://skorks.com/2010/03/how-to-quickly-generate-a-large-file-on-the-command-line-with-linux/}.
 
 \bibitem{SPEC}
 {SPEC Cloud R IaaS 2018}.
 \newblock
-  \url{https://www.spec.org/cloud/results/res2019q4/cloudiaas2018-20191113-00005.html},
-  Marec 2018.
+  \url{https://www.spec.org/cloud/results/res2019q4/cloudiaas2018-20191113-00005.html}.
+
+\bibitem{TBR}
+{Technology Business Research, Inc.}
+\newblock \url{https://tbri.com/tbr-difference/}.
 
 \end{thebibliography}

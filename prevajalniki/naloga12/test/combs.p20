@@ -1,0 +1,76 @@
+fun putChar(c:char):void = none
+fun getChar():char = (0:char)
+
+fun putInteger(i:integer):void =
+    {
+      if (i<0) then { putChar('-'); i=-i; } else none;
+      if (i==0) then putChar('0') else put(i);
+    }
+    where
+    {
+      fun put(i:integer):void =
+          {
+            if (i==0) then none else {
+              put(i/10);
+              putChar(((i%10+('0':integer)):char));
+            };
+          }
+    }
+
+fun putString(s:^char):void =
+    {
+      i=0;
+      while (((s:integer)+(i*8):^char)^!=(0:char)) do {
+        putChar(((s:integer)+(i*8):^char)^);
+        i=i+1;
+      };
+      none;
+    }
+    where
+    {
+      var i:integer
+    }
+
+#---------------------------------------------------------------
+
+fun combs(i:integer,n:integer,ns:^([32]integer)):void =
+    {
+      if i==n then
+        {
+          j=0;
+          while j<n do {
+            putInteger(ns^[j]);
+            putChar(' ');
+            j=j+1;
+          };
+          putChar((10:char));
+        } where { var j:integer }
+      else
+        {
+          j=0;
+          while j<n do {
+            ns^[i]=j;
+            combs(i+1,n,ns);
+            j=j+1;
+          };
+        } where { var j:integer };
+    }
+
+fun main():integer =
+    {
+      n=5;
+      {
+        i=0;
+        while i<n do {
+          ns[i]=i;
+          i=i+1;
+        };
+      } where { var i:integer };
+      combs(0,n,^ns);
+      0;
+    }
+    where
+    {
+      var n:integer
+      var ns:[32]integer
+    }

@@ -57,8 +57,8 @@ public class LiveAn extends Phase {
 
 					Vector<AsmInstr> nexts = new Vector<>();
 
-					// ali ima ukaz skok
-					if (instr.jumps() != null) {
+					// ali je ukaz skok
+					if (!instr.jumps().isEmpty()) {
 						// dodamo vse ukaze, ki so po jump labelah
 						for (MemLabel jmpLabel : instr.jumps()) {
 							AsmInstr instrAfterJump = labels.get(jmpLabel);
@@ -70,9 +70,9 @@ public class LiveAn extends Phase {
 							}
 						}
 
-						// ce uses != null, potem je to conditional jump, naslednik je tudi naslednji
-						// ukaz
-						if (instr.uses() != null && code.instrs.size() > i + 1) {
+						// preverimo, da to ni JMP ukaz (vsi ostali JUMPI imajo za naslednika tudi
+						// naslednji ukaz)
+						if (!instr.toString().startsWith("JMP") && code.instrs.size() > i + 1) {
 							nexts.add(code.instrs.get(i + 1));
 						}
 					} else if (code.instrs.size() > i + 1) {

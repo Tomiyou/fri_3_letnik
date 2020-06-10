@@ -1,0 +1,35 @@
+fun exit():void = none
+fun putChar(c:char):void = none
+fun getChar():char = (0:char)
+
+fun putInteger(i:integer):void = {
+  if (i<0) then { putChar('-'); i=-i; } else none;
+  if (i==0) then putChar('0') else put(i);
+} where {
+  fun put(i:integer):void = {
+    if (i==0) then none else {
+      put(i/10);
+      putChar(((i%10+('0':integer)):char));
+    };
+  }
+}
+
+fun main():void = {
+  # test pointer castov
+  qs = ^n;
+  qs^ = 10;
+  putInteger(n);
+  putChar((10:char));
+
+  # test new
+  qs = new 8;
+  (qs:^integer)^ = 22;
+  putInteger((qs:^integer)^);
+  putChar((10:char));
+
+  # del itak sam POP dela
+  del qs;
+} where {
+  var n:integer
+  var qs:^integer
+}

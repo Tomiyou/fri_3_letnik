@@ -407,7 +407,7 @@ Rezultati meritev so precej zanimivi. Čeprav je procesor v prenosnem računalni
 	\item nekaj drugega;
 \end{itemize}
 
-Na to primerjavo se dobro nanaša tudi Xeon procesor (slika \ref{fig:3_cputest3}) na virtualnem računalniku, ki je zanimivo počasnejši v enem testu in hitrejši v drugem testu od prenosnega procesorja. Glede na to, da ima Xeon boljšo oceno za eno jedro kot prenosni procesor, bi moral biti hitrejši v obeh testih. Iz primerjav naših procesorjev in iz primerjav rezultatov na Azure platformi sklepava, da je razlika posledica arhitekturnih razlik med procesorji ali pa razlik v pomnilniku. Xeon je namreč 48 jedrni procesor in midva si ga seveda deliva z ostalimi virtualkami, ki tečejo na tem procesorju, kar lahko vpliva na delovanje predpomnilnika.
+Na to primerjavo se dobro nanaša tudi Xeon procesor (slika \ref{fig:3_cputest3}) na virtualnem računalniku, ki je zanimivo počasnejši v enem testu in hitrejši v drugem testu od prenosnega procesorja. Glede na to, da ima Xeon boljšo oceno za eno jedro kot prenosni procesor, bi moral biti hitrejši v obeh testih. Iz primerjav naših procesorjev in iz primerjav rezultatov na Azure platformi sklepamo, da je razlika posledica arhitekturnih razlik med procesorji ali pa razlik v pomnilniku. Xeon je namreč 48 jedrni procesor in mi si ga seveda delimo z ostalimi virtualkami, ki tečejo na tem procesorju, kar lahko vpliva na delovanje predpomnilnika.
 
 \subsection{Test ob spremenjenih podatkovnih strukturah}
 
@@ -502,13 +502,12 @@ Ostalih diagramov, ki jih insights prikaže nidmo dodali v poročilo, saj so rez
 \subsection{Obremenitev pomnilnika}
 
 V tem razdelku bomo zapolnili pomnilnik na 90\% in nato izvajali program testiranja CPU in program, ki bo zapolnil pomnilnik še za 10\%.
-Ukaz za zapolnitev pomnilnika na 90\% smo našli na stackexchange.com \cite{mem90Fill} in sproži program stress-ng, ki se ustavi le, ko dobi signal SIGINT.
+Ukaz za zapolnitev pomnilnika na 90\% smo našli na stackexchange.com \cite{mem90Fill} in sproži program stress-ng.
 \begin{verbatim}
 stress-ng --vm-bytes $(awk '/MemAvailable/{printf "%d\n", $2 * 0.9;}
 ' < /proc/meminfo)k --vm-keep -m 1
 \end{verbatim}
-Ta ukaz zagotovi da operacijski sistem ne bo uporabljal tega dela pomnilnika in da ga ne bo zamenjal z drugimi segmenti z diska. Pomankljivost tega ukaza je, da uporablja celotno jedro procesorja za svoje izvajanje. Zaradi tega, ko smo poganjali naš program, ki testira CPU se je njegovo 
-izvajanje povečalo iz 22 sekund na 30 sekund. Mislimo, da se je to zgodilo zaradi dodatnih programov, ki so delovali na jedru na katerem se je izvajal naš program, ker je bilo drugo jedro popolno zasedeno zaradi ukaza stress-ng. Na spodnjih slikah \ref{fig:3_ram1} in \ref{fig:3_ram2} lahko vidite pomnilnik alociran z ukazom stress-ng in uporabo diska pri menjavah pomnilnika. 
+Ta ukaz zagotovi da operacijski sistem ne bo uporabljal tega dela pomnilnika in da ga ne bo zamenjal z drugimi segmenti z diska. Pomankljivost tega ukaza je, da uporablja celotno jedro procesorja za svoje izvajanje. Zaradi tega, ko smo poganjali naš program, ki testira CPU se je njegovo izvajanje povečalo iz 22 sekund na 30 sekund. Mislimo, da se je to zgodilo zaradi dodatnih programov, ki so delovali na jedru na katerem se je izvajal naš program, ker je bilo drugo jedro popolno zasedeno zaradi ukaza stress-ng. Na spodnjih slikah \ref{fig:3_ram1} in \ref{fig:3_ram2} lahko vidite pomnilnik alociran z ukazom stress-ng in uporabo diska pri menjavah pomnilnika. 
 
 
 \begin{figure}[H]
@@ -528,9 +527,7 @@ Na sliki \ref{fig:3_ram1} lahko vidimo, da z zapolnitvijo pomnilnika, mora opera
 \end{figure}
 
 
-Naš program smo zagnali 14x zaporedoma (da se lahko vidi na grafih Azure platforme, ker je interval na 1 minuto),
-medtem, ko je bilo 90\% pomnilnika zasedenega. Celotni virtualni računalnik je med izvajanjem bil zelo neodziven ( npr.
-rabil je v povprečju 4 sekunde več pri vzpostavitvi ssh povezave in tudi izvajanje programov postane bolj neodzivno.) in pri izvajanju 5. instance programa je pomnilnik prišel do 100\%, ko se je zgodilo to je Operacijski sistem ubil vse naše procese, da je sprostil svoje resource. To lahko tudi razberemo iz slik \ref{fig:3_ram3} in \ref{fig:3_ram4}.
+Naš program smo zagnali 14x zaporedoma (da se lahko vidi na grafih Azure platforme, ker je interval na 1 minuto), medtem, ko je bilo 90\% pomnilnika zasedenega. Celotni virtualni računalnik je med izvajanjem postal zelo neodziven (npr. rabil je v povprečju 4 sekunde več pri vzpostavitvi ssh povezave in tudi izvajanje programov postane bolj neodzivno). Prav izvajanju  tako je pri izvajanju 5. instance programa, ko je pomnilnik prišel do 100\%, Operacijski sistem ubil vse naše procese, da je sprostil svoje resource. To lahko tudi razberemo iz slik \ref{fig:3_ram3} in \ref{fig:3_ram4}.
 
 
 \begin{figure}[H]
@@ -550,7 +547,35 @@ rabil je v povprečju 4 sekunde več pri vzpostavitvi ssh povezave in tudi izvaj
 
 Po testiranju CPU z našim programom smo napisala program, ki statično alocira pomnilnik. V programu smo izklopili menjavo alociranih delov pomnilnika. Če smo preseglai pomnilnik, ki je bil na voljo, je operacijski sistem ubil program. Vendar se na grafih Azura ne pokaže nič, saj je interval časa po katerih se riše graf prevelik.
 
+\subsection{Test zmogljivosti baze MySQL}
+
+Za zadnji test zmogljivost smo izvedli preprost test baze MySQL. Napisali smo preprost program, ki najprej vzpostavi povezavo z bazo, nato v njo 500-krat zaporedoma vstavi in odstrani vrstico. Sama polja, ki jih vstavlja v tabelo v bazi sicer niso pomembna, lahko pa omenimo da vstavljamo 3 nize znakov in eno celo število. Izmerili smo čas pred začetkom vstavljanja in brisanja, ter čas po vseh 500 izvedbah. Nato smo razliko teh dveh časov delili s številom vseh ponovitev, torej 500, da smo dobili povprečen čas trajanja 1 ponovitve vstavljanja in brisanja iz baze.
+
+Poleg samega programa za testiranje, smo ustvarili tudi skripto, ki je le ta program pognala vzporedno v nekem številu. Npr.: vzporedno smo pognali 50 kopij tega programa in merili čas izvajanja v vsaki kopiji posebej. Rezultati teh testiranj so spodaj.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{ | r | r | r | r | }
+		\hline
+		Število kopij programa & Povprečni čas vstavitve in brisanja [ms]  \\
+		\hline
+		1 & 13.5 \\
+		5 & 25.2 \\
+		10 & 28.2 \\
+		25 & 29.2 \\
+		50 & 34.7 \\
+		75 & 39.9 \\
+		150 & 61.3 \\
+		\hline
+	\end{tabular}
+	\caption{Povprečni čas izvajanja 1 vstavitve in brisanja pri določenem številu kopij programa.}
+	\label{table:1_chunks}
+\end{table}
+
+Kot pričakovano se čas 1 vstavitve in brisanja slabša, vendar morda ne zaradi pričakovanega razloga. V tej virtualki sta na voljo le 2 jedri, kar pomeni, da se dejansko lahko izvajata le 2 procesa hkrati. Sklepamo, da je daljši čas ni posledica paralelnega izvajanja večih kopij programa, vendar je le ta posledica odločanja operacijskega sistema, kateri proces dobi procesorski čas. Operacijski sistem vsaki kopiji programa dodeli nekaj časa izvajanja, potem pa ga odvzame in da naslednjemu procesu. Nikoli ne pride do dejanskih težav pri dohajanju podatkovne baze z zahtevami, ki nanjo pridejo, saj bi se to poznalo kot hud porast v času izvajanja, ki pa ga v tabeli ne zasledimo. Je pa res, da se pri zadnji meritvi s 150 kopijami programa, čas močno poslabša, vendar ne dovolj za kakšne večje sklepe. 150 je namreč tudi maksimalno število hkratnih povezav, torej je to nekakšen najslabši primer za bazo.
+
+Predvidevamo, da bi bilo za kakšen bolj realen test podatkovne bazo potrebno vzpostaviti nek porazdeljen test, ki bi iz večih lokacij izvajal bolj kompleksne zahteve na bazo, dokler ta ne bi prišla do mej uporabnosti.
 
 \section{Zaključek}
-Tule bo zaključek.
+Na trgu je veliko orodij za testiranje Oblačnih platform, nekatera so, kot smo ugotovili plačljiva, spet druga so brezplačna velika večina plačljivih orodij nima veliko izboljšav izmed najboljših brezplačnih orodij. To smo lahko videli pri testiranju oblačne platforme Azure, kjer smo uporabljali brezplačna orodja in še zmeraj dobili zadovoljive rezultate. Pri ročnem testiranju Azure se nam zdi iz naših ugotovitev, da se lahko še največ naučimo prav iz njih, saj lahko z ročnim pisanjem kode testiramo veliko stvari, ki jih orodja narejena zato ne morejo, ker so nekatere stvari preveč specifične uporabnikovim zahtevam. Testiranje platforme Azure je pokazalo njeno slabosti in prednosti, pod šibkosti bi lahko vmestili lokacijo računalnika, med prednosti pa njeno odlično računsko moč. Vse to je seveda predpostavljeno z dejstvom, da smo uporabljali zastonjski račun na platformi, ki ima dokaj omejen nabor funkcionalnosti in strojne opreme.
 

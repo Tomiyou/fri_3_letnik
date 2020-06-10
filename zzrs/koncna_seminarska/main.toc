@@ -35,4 +35,5 @@
 \contentsline {section}{\numberline {1.10}Zasedenost resursov}{19}{section.1.10}%
 \contentsline {subsection}{\numberline {1.10.1}Zasedenost diskovnih in pomnilniških resursov}{20}{subsection.1.10.1}%
 \contentsline {subsection}{\numberline {1.10.2}Obremenitev pomnilnika}{22}{subsection.1.10.2}%
-\contentsline {section}{\numberline {1.11}Zaključek}{25}{section.1.11}%
+\contentsline {subsection}{\numberline {1.10.3}Test zmogljivosti baze MySQL}{25}{subsection.1.10.3}%
+\contentsline {section}{\numberline {1.11}Zaključek}{26}{section.1.11}%
